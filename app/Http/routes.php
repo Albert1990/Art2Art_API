@@ -1,0 +1,59 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register all of the routes for an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::group(['prefix'=>'api/v1'],function(){
+
+    //users
+    Route::post('auth/register','\App\Http\Controllers\Api\v1\UsersController@register');
+    Route::post('auth/login','\App\Http\Controllers\Api\v1\UsersController@login');
+    Route::post('auth/forget_password','\App\Http\Controllers\Api\v1\UsersController@forgetPassword');
+    Route::post('auth/reset_password','\App\Http\Controllers\Api\v1\UsersController@resetPassword');
+
+
+    // countries
+    Route::get('countries','\App\Http\Controllers\Api\v1\CountriesController@index');
+
+    //Curriculums
+    Route::get('curriculums','\App\Http\Controllers\Api\v1\CurriculumsController@index');
+
+    //Subjects
+    Route::get('subjects','\App\Http\Controllers\Api\v1\SubjectsController@index');
+
+    Route::group(['middleware'=>'jwt.auth'],function(){
+        //users
+        Route::put('users', '\App\Http\Controllers\Api\v1\UsersController@update');
+
+        //categories
+        Route::post('categories', '\App\Http\Controllers\Api\v1\CategoriesController@store');
+        Route::put('categories/{id}', '\App\Http\Controllers\Api\v1\CategoriesController@update');
+        Route::delete('categories/{id}', '\App\Http\Controllers\Api\v1\CategoriesController@destroy');
+
+    });
+
+    // Optional Auth
+    Route::group(['middleware'=>'jwt.auth:optional'],function(){
+
+        //Artworks
+        Route::get('artworks','\App\Http\Controllers\Api\v1\ArtworksController@index');   
+        Route::get('artworks/{id}','\App\Http\Controllers\Api\v1\ArtworksController@show');   
+    });
+
+});
+
+// Route::auth();
+
+// Route::get('/home', 'HomeController@index');
