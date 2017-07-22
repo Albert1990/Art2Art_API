@@ -143,7 +143,7 @@
   },
   {
     "type": "post",
-    "url": "/auth/forgetPassword",
+    "url": "/auth/forget_password",
     "title": "Forget Password",
     "name": "ForgetPassword",
     "group": "Auth",
@@ -174,14 +174,21 @@
         "Error 4xx": [
           {
             "group": "Error 4xx",
-            "type": "String",
+            "type": "json",
             "optional": false,
             "field": "VALIDATION_ERROR",
-            "description": "<p>validation failed</p>"
+            "description": ""
           },
           {
             "group": "Error 4xx",
-            "type": "String",
+            "type": "json",
+            "optional": false,
+            "field": "INVALID_USER",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
             "optional": false,
             "field": "UNKNOWN_EXCEPTION",
             "description": ""
@@ -189,6 +196,21 @@
         ]
       },
       "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"CANT_RESET_PASSWORD\",\"message\":\"Could not reset password\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: VALIDATION_ERROR",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"email\":[\"The email must be a valid email address.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: UNKNOWN_EXCEPTION",
+          "content": "\n{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\"Error Processing Request in /Api/v1/UsersController.php in Line :296\",\"details\":[]}}",
+          "type": "json"
+        },
         {
           "title": "Error-Response:",
           "content": "{\"error\":{\"code\":\"INVALID_USER\",\"message\":\"We couldn't find your account with that information.\",\"details\":[]}}",
@@ -254,14 +276,14 @@
         "Error 4xx": [
           {
             "group": "Error 4xx",
-            "type": "String",
+            "type": "json",
             "optional": false,
             "field": "VALIDATION_ERROR",
-            "description": "<p>validation failed</p>"
+            "description": ""
           },
           {
             "group": "Error 4xx",
-            "type": "String",
+            "type": "json",
             "optional": false,
             "field": "UNKNOWN_EXCEPTION",
             "description": ""
@@ -272,6 +294,16 @@
         {
           "title": "Error-Response:",
           "content": "{\"error\":{\"code\":\"CANT_RESET_PASSWORD\",\"message\":\"Could not reset password\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: VALIDATION_ERROR",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"email\":[\"The email must be a valid email address.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: UNKNOWN_EXCEPTION",
+          "content": "\n{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\"Error Processing Request in /Api/v1/UsersController.php in Line :296\",\"details\":[]}}",
           "type": "json"
         }
       ]
@@ -348,132 +380,6 @@
         {
           "title": "Error-Response:",
           "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"password\":[\"The password field is required.\"]}}}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
-    "groupTitle": "Auth"
-  },
-  {
-    "type": "post",
-    "url": "/auth/register",
-    "title": "Register",
-    "name": "UserRegister",
-    "group": "Auth",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "email",
-            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "password",
-            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>full name of the User.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>phone of the User.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "gender",
-            "description": "<p>gender of the User (MALE | FEMALE).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Date",
-            "optional": false,
-            "field": "birthday",
-            "description": "<p>birthday of the User (UTC format 2017-07-19 21:16:04.000000).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "countryId",
-            "description": "<p>user country id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "File",
-            "optional": true,
-            "field": "photo",
-            "description": "<p>user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": true,
-            "field": "socialId",
-            "description": "<p>user social platform id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": true,
-            "field": "socialPlatform",
-            "description": "<p>(FACEBOOK, GOOGLE_PLUS,TWITTER).</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\"data\":{\"id\":\"2\",\"email\":\"\",\"name\":\"samer shatta\",\"gender\":\"MALE\",\"phone\":\"76309032\",\"address\":\"\",\"birthday\":\"11\\/09\\/1990\",\"photo\":\"https:\\/\\/graph.facebook.com\\/bbbdgdg\\/picture?type=normal\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwOC9hcGkvdjEvYXV0aC9yZWdpc3RlciIsImlhdCI6MTQ5ODE4OTgyNSwiZXhwIjoxNDk4MTkzNDI1LCJuYmYiOjE0OTgxODk4MjUsImp0aSI6IjNhSm5PNHZOODFOQWtWWEsifQ.H3L-bgou3hT7q5a7vYSDm1l2G8Xh7wc8gcibVusb1cM\",\"isActive\":true,\"isVerified\":\"\",\"country\":{\"id\":\"4\",\"name\":\"Afghanistan\"}}}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ValidationError",
-            "description": "<p>Validation error.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "String",
-            "optional": false,
-            "field": "UNKNOWN_EXCEPTION",
-            "description": "<p>Unknown Exception.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\"error\":{\"code\":\"USER_EXIST_BEFORE\",\"message\":\"\",\"details\":[]}}",
           "type": "json"
         },
         {
@@ -567,6 +473,45 @@
   },
   {
     "type": "get",
+    "url": "/students",
+    "title": "Students List",
+    "name": "Students_List_access_by_teacher_",
+    "group": "Students",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2017-10-05\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
     "url": "/subjects",
     "title": "Subjects List",
     "name": "Subjects_List",
@@ -603,116 +548,5 @@
     "version": "0.0.0",
     "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/SubjectsController.php",
     "groupTitle": "Subjects"
-  },
-  {
-    "type": "put",
-    "url": "/users",
-    "title": "Update User Profile",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "string",
-            "optional": false,
-            "field": "token",
-            "description": "<p>User Auth Token</p>"
-          }
-        ]
-      }
-    },
-    "name": "UpdateUserProfile",
-    "group": "Users",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "name",
-            "description": "<p>name of the User.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phone",
-            "description": "<p>phone of the User.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "gender",
-            "description": "<p>gender of the User (MALE | FEMALE).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Date",
-            "optional": false,
-            "field": "birthday",
-            "description": "<p>birthday of the User (UTC format 2017-07-19 21:16:04.000000).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "countryId",
-            "description": "<p>user country id.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "File",
-            "optional": true,
-            "field": "photo",
-            "description": "<p>user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "{\"data\":{\"id\":\"1\",\"email\":\"samer.shatta@gmail.com\",\"name\":\"Ziad shatta\",\"gender\":\"FEMALE\",\"phone\":\"76309032\",\"address\":\"\",\"birthday\":\"11\\/09\\/1990\",\"photo\":\"http:\\/\\/localhost:3008\\/images\\/uploads\\/users\\/default-user.jpg\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwOC9hcGkvdjEvdXNlcnMiLCJpYXQiOjE0OTgyNTE1NzYsImV4cCI6MTQ5ODI1NTE3NiwibmJmIjoxNDk4MjUxNTc2LCJqdGkiOiJMSHBCQmJQYld3YXpuT2xXIn0.jpk6zH5wf9Rdy-XzP_FbqINmuS0jTZVV6JvjfXPXY7U\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"4\",\"name\":\"Afghanistan\"}},\"message\":\"Item updated successfully\"}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "ValidationError",
-            "description": "<p>Validation error.</p>"
-          },
-          {
-            "group": "Error 4xx",
-            "type": "String",
-            "optional": false,
-            "field": "UNKNOWN_EXCEPTION",
-            "description": "<p>Unknown Exception.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\"error\":{\"code\":\"USER_EXIST_BEFORE\",\"message\":\"\",\"details\":[]}}",
-          "type": "json"
-        },
-        {
-          "title": "Error-Response:",
-          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
-    "groupTitle": "Users"
   }
 ]

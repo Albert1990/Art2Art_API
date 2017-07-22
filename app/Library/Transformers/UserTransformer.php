@@ -40,7 +40,7 @@ class UserTransformer extends BaseTransformerAbstract{
 
         $returned_date = [];
         if($this->isMinified){
-            if($item->user_type=='student'){
+            if($item->user_type=='student' || $item->user_type=='teacher' ){
                 $returned_date = $this->beatify([
                     'id' => (string)$item->user_id,
                     'email' => $item->user_email,
@@ -62,7 +62,7 @@ class UserTransformer extends BaseTransformerAbstract{
             }
 
         }else{
-             if($item->user_type=='student'){
+             if($item->user_type=='student' || $item->user_type=='teacher' ){
                 $returned_date = $this->beatify([
                     'id' => (string)$item->user_id,
                     'type' =>$item->user_type,

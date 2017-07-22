@@ -16,7 +16,7 @@
 // });
 
 Route::group(['prefix'=>'api/v1'],function(){
-
+ 
     //users
     Route::post('auth/register','\App\Http\Controllers\Api\v1\UsersController@register');
     Route::post('auth/login','\App\Http\Controllers\Api\v1\UsersController@login');
@@ -37,6 +37,7 @@ Route::group(['prefix'=>'api/v1'],function(){
         //users
         Route::put('users', '\App\Http\Controllers\Api\v1\UsersController@update');
 
+
         //categories
         Route::post('categories', '\App\Http\Controllers\Api\v1\CategoriesController@store');
         Route::put('categories/{id}', '\App\Http\Controllers\Api\v1\CategoriesController@update');
@@ -52,6 +53,12 @@ Route::group(['prefix'=>'api/v1'],function(){
         Route::get('artworks/{id}','\App\Http\Controllers\Api\v1\ArtworksController@show');   
     });
 
+
+    Route::group(['middleware'=>['jwt.auth','has.role:teacher']],function(){
+
+        //Artworks
+        Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index');   
+    });
 });
 
 // Route::auth();
