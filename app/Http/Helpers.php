@@ -21,6 +21,7 @@ use Mockery\CountValidator\Exception;
 
 use Illuminate\Support\Facades\Auth;
 
+use Intervention\Image\Facades\Image as Image;
 
 class Helpers {
     private static $fractal=null;
@@ -143,12 +144,17 @@ class Helpers {
     public static function uploadFile($file,$filePath = "images/uploads",$prefix = "_file")
     {
         if(empty($file)) return "";
-
         $filename = uniqid($prefix).".".$file -> getClientOriginalExtension();
         $file->move($filePath,$filename);
         return $filename;
         //return $filePath.$filename;
     }
+
+    public static function createThumb($filepath,$filename,$newfilePath = "images/uploads/arts/thumb",$width=100,$height=100){
+        $image = Image::make(public_path($filepath.$filename));
+        $image->fit($width, $height)->save(public_path($newfilePath . $filename));
+    }
+    
 
     public static function deleteFile($file)
     {
@@ -170,6 +176,18 @@ class Helpers {
             return null;
         }
     }
+
+    public static function ageCalculator($dob)
+    {
+        if($dob){
+            $diff = (date('Y') - date('Y',strtotime($dob)));
+            return  $diff;
+        }else{
+            return 0;
+        }
+
+    }
+
 
 //    public static function generateThumb($file,$filePath = "images/uploads",$prefix = "_thumb")
 //    {

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateCategoryRequest extends ApiRequest
+class CommentRequest extends ApiRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CreateCategoryRequest extends ApiRequest
     public function rules()
     {
         return [
-            'nameEn' => 'required',
-            'nameAr' => 'required',
+            'comment' => 'required|string',
+            'artwork_id' => 'required|integer|exists:artworks,art_id',
         ];
     }
 }

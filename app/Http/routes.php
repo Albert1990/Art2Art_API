@@ -34,14 +34,20 @@ Route::group(['prefix'=>'api/v1'],function(){
     Route::get('subjects','\App\Http\Controllers\Api\v1\SubjectsController@index');
 
     Route::group(['middleware'=>'jwt.auth'],function(){
+
+        //profile
+        Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
+
+        //Comments
+        Route::post('comments', '\App\Http\Controllers\Api\v1\CommentsController@store');
+        Route::put('comments/{id}', '\App\Http\Controllers\Api\v1\CommentsController@update');
+        Route::delete('comments/{id}', '\App\Http\Controllers\Api\v1\CommentsController@destroy');  
+
+        //Likes
+        Route::post('likes', '\App\Http\Controllers\Api\v1\LikesController@store'); 
+
         //users
         Route::put('users', '\App\Http\Controllers\Api\v1\UsersController@update');
-
-
-        //categories
-        Route::post('categories', '\App\Http\Controllers\Api\v1\CategoriesController@store');
-        Route::put('categories/{id}', '\App\Http\Controllers\Api\v1\CategoriesController@update');
-        Route::delete('categories/{id}', '\App\Http\Controllers\Api\v1\CategoriesController@destroy');
 
     });
 
@@ -50,14 +56,21 @@ Route::group(['prefix'=>'api/v1'],function(){
 
         //Artworks
         Route::get('artworks','\App\Http\Controllers\Api\v1\ArtworksController@index');   
-        Route::get('artworks/{id}','\App\Http\Controllers\Api\v1\ArtworksController@show');   
+        Route::get('artworks/{id}','\App\Http\Controllers\Api\v1\ArtworksController@show');
+        Route::get('artworks/{id}/comments','\App\Http\Controllers\Api\v1\CommentsController@index');  
+        Route::get('artworks/{id}/likes','\App\Http\Controllers\Api\v1\LikesController@index');     
     });
 
 
     Route::group(['middleware'=>['jwt.auth','has.role:teacher']],function(){
 
+        //Students
+        Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index'); 
+
         //Artworks
-        Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index');   
+        Route::post('artworks', '\App\Http\Controllers\Api\v1\ArtworksController@store');
+        Route::put('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@update');
+        Route::delete('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@destroy'); 
     });
 });
 

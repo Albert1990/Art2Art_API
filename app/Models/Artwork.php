@@ -8,14 +8,21 @@ class Artwork extends BaseModel
 {
     protected $table = 'artworks';
     protected $primaryKey = 'art_id';
-    public $timestamps = true;
+    public $timestamps = false;
 
-    // protected $fillable = [
-    //     'name_en',
-    //     'name_ar',
-    //     'cover',
-    //     'icon',
-    // ];
+    protected $fillable = [
+        'art_title',
+        'art_display_status',
+        'art_keywords',
+        'art_subject_id',
+        'art_student_id',
+        'art_comment_1',
+        'art_creation_date',
+        'art_upload_date',
+        'art_img_path',
+        'art_teacher_id',
+        'art_student_age',
+    ];
 
     public function subject()
     {

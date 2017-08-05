@@ -34,7 +34,7 @@ class UserTransformer extends BaseTransformerAbstract{
 
     public function transform(User $item){
         
-        if($item->user_type=='student'){
+        if($item->user_type=='student' && !$this->isMinified ){
             $this->defaultIncludes[] = 'school';
         }
 

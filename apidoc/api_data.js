@@ -86,6 +86,137 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/artworks",
+    "title": "Artworks List",
+    "name": "Artworks_List",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: Without access token",
+          "content": "{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":\"\"},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":\"\"},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":\"\"}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response: With access token",
+          "content": "\n{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"921\",\"email\":\"shoshaho@hotmail.com\",\"first_name\":\"shoshaho\",\"last_name\":\"shoshaho\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},\"school\":{\"id\":\"909\",\"email\":\"mhd.oubaid@gmail.com\",\"name\":\"Oubaid\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "delete",
+    "url": "/artworks/{id}",
+    "title": "Delete Artwork",
+    "name": "Delete_Artwork",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"Item deleted successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
     "url": "/artworks/{id}",
     "title": "Show Artwork",
     "name": "Show_Artwork",
@@ -139,6 +270,236 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "post",
+    "url": "/artworks",
+    "title": "Store Artwork",
+    "name": "Store_Artwork",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "String",
+            "description": "<p>title</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "File",
+            "description": "<p>image</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "Number",
+            "description": "<p>subjectId</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "Boolean",
+            "description": "<p>dispaly (0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":{\"id\":\"29\",\"title\":\"eeeeee\",\"comment_1\":\"comment text\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file5985eae3513f0.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file5985eae3513f0.jpg\",\"createdAt\":\"2017-08-05\",\"uploadedAt\":\"2017-08-05\",\"keywords\":\"ttt,ttt\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "put",
+    "url": "/artworks/{id}",
+    "title": "Update Artwork",
+    "name": "Update_Artwork",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "String",
+            "description": "<p>title</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "File",
+            "description": "<p>image</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "Date",
+            "description": "<p>creation_date</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "Boolean",
+            "description": "<p>dispaly (0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":{\"id\":\"29\",\"title\":\"eeeeee\",\"comment_1\":\"comment text\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file5985eae3513f0.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file5985eae3513f0.jpg\",\"createdAt\":\"2017-08-05\",\"uploadedAt\":\"2017-08-05\",\"keywords\":\"ttt,ttt\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
+    "url": "/artworks/{id}/comments",
+    "title": "comments List",
+    "name": "comments_List",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"25\",\"artwork\":20,\"user\":{\"id\":\"939\",\"email\":\"molham.mah@gmail.com\",\"first_name\":\"Tarazan\",\"last_name\":\"tr\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"comment\":\"school gallery opening day\"},{\"id\":\"35\",\"artwork\":20,\"user\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}},\"comment\":\"comment mmmm put\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/commentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
+    "url": "/artworks/{id}/likes",
+    "title": "Likes List",
+    "name": "likes_List",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/commentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -394,6 +755,186 @@ define({ "api": [
     "groupTitle": "Auth"
   },
   {
+    "type": "delete",
+    "url": "/comments/{id}",
+    "title": "Delete Comment",
+    "name": "Delete_Comment",
+    "group": "Comments",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"Item deleted successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
+    "type": "post",
+    "url": "/comments",
+    "title": "Store Comment",
+    "name": "Store_Comment",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "Number",
+            "description": "<p>artwork_id</p>"
+          },
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "String",
+            "description": "<p>comment</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"36\",\"artwork\":20,\"user\":946,\"comment\":\"comment test\"},\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"artwork_id\":[\"The selected artwork id is invalid.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
+    "type": "put",
+    "url": "/comments",
+    "title": "Update Comment",
+    "name": "Update_Comment",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "optional": false,
+            "field": "String",
+            "description": "<p>comment</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"36\",\"artwork\":20,\"user\":946,\"comment\":\"comment test update\"},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": "<p>validation failed</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
     "type": "get",
     "url": "/countries",
     "title": "Countries List",
@@ -470,6 +1011,52 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CurriculumsController.php",
     "groupTitle": "Curriculums"
+  },
+  {
+    "type": "post",
+    "url": "/Likes",
+    "title": "Toggel Like",
+    "name": "Toggel_Like__if_not_like_store_else_delete_like_",
+    "group": "Likes",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":\"\",\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": "<p>validation failed</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/LikesController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
+    "groupTitle": "Likes"
   },
   {
     "type": "get",

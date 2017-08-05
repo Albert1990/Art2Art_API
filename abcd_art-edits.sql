@@ -8,3 +8,12 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+
+
+CREATE TABLE `abcd_art`.`art_likes` (
+ `like_id` INT NOT NULL AUTO_INCREMENT ,
+ `like_user_id` INT NOT NULL ,
+ `like_art_id` INT NOT NULL ,
+  PRIMARY KEY (`like_id`)) ENGINE = InnoDB;
+
+
