@@ -77,6 +77,16 @@ class Helpers {
         return asset($path.$file);
     }
 
+    public static function getUserImagePath($file)
+    {
+        return asset('/public/images/uploads/users/'.$file);
+    }
+
+    public static function getArtworkImagePath($type,$file)
+    {
+        return asset('/public/images/uploads/arts/'.$type.$file);
+    }
+
     public static function generateQrCode()
     {
         return rand(1, 10000000);

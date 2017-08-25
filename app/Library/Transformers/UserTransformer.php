@@ -18,12 +18,12 @@ use App\Library\Transformers\ArtworkTransformer;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends BaseTransformerAbstract{
-    // const IMAGES_PATH = "images/uploads/users/";
-    const IMAGES_PATH='http://www.art2artgallery.com/public/resources/profile_images/';
+    // const IMAGES_PATH='http://www.art2artgallery.com/public/resources/profile_images/';
+    // private $default_user_image = 'http://www.art2artgallery.com/public/img/default/default.jpg';
+
+    private $default_user_image = 'default-user.jpg';
 
     private $is_minified = false;
-    private $default_user_image = 'http://www.art2artgallery.com/public/img/default/default.jpg';
-
     protected $defaultIncludes = [
 
     ];
@@ -48,7 +48,7 @@ class UserTransformer extends BaseTransformerAbstract{
                     'email' => $item->user_email,
                     'first_name' =>$item->user_first_name,
                     'last_name' =>$item->user_last_name,
-                    'photo' => !($item->user_image && $item->user_image_verified)? $this->default_user_image:(IMAGES_PATH.$item->user_image),
+                    'photo' => Helpers::getUserImagePath(!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)),
                     'isActive' => $item->user_status == 1 ? true : false,
                     'isVerified' => $item->user_email_verified == 1 ? true : false,
                 ]);
@@ -57,9 +57,7 @@ class UserTransformer extends BaseTransformerAbstract{
                     'id' => (string)$item->user_id,
                     'email' => $item->user_email,
                     'name' =>$item->user_school_name,
-                    'photo' => !($item->user_image && $item->user_image_verified)? $this->default_user_image:(IMAGES_PATH.$item->user_image),
-                    'isActive' => $item->user_status == 1 ? true : false,
-                    'isVerified' => $item->user_email_verified == 1 ? true : false,
+                    'photo' => Helpers::getUserImagePath((!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)))
                 ]);
             }
 
@@ -75,8 +73,7 @@ class UserTransformer extends BaseTransformerAbstract{
                     // 'phone' => $item->user_phonenumber,
                     'address' => $item->user_address,
                     'birthday' => $item->user_dob,
-                    // 'photo' => $item->user_image == '' ? Helpers::getImageFullPath($this->default_user_image,self::IMAGES_PATH) : Helpers::getImageFullPath($item->user_image,self::IMAGES_PATH),
-                    'photo' => !($item->user_image && $item->user_image_verified)? $this->default_user_image:(IMAGES_PATH.$item->user_image),
+                    'photo' => Helpers::getUserImagePath(!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)),
                     'isActive' => $item->user_status == 1 ? true : false,
                     'isVerified' => $item->user_email_verified == 1 ? true : false,
                 ]);
@@ -85,11 +82,9 @@ class UserTransformer extends BaseTransformerAbstract{
                     'id' => (string)$item->user_id,
                     'type' =>$item->user_type,
                     'email' => $item->user_email,
-                    'first_name' =>$item->user_first_name,
-                    'last_name' =>$item->user_last_name,
                     'name' =>$item->user_school_name,
                     'phone' => $item->user_phonenumber,
-                    'photo' => !($item->user_image && $item->user_image_verified)? $this->default_user_image:(IMAGES_PATH.$item->user_image),
+                    'photo' => Helpers::getUserImagePath(!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)),
                     'isActive' => $item->user_status == 1 ? true : false,
                     'isVerified' => $item->user_email_verified == 1 ? true : false,
                 ]);

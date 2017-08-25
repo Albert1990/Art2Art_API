@@ -30,6 +30,9 @@ Route::group(['prefix'=>'api/v1'],function(){
     //Curriculums
     Route::get('curriculums','\App\Http\Controllers\Api\v1\CurriculumsController@index');
 
+    //Schools
+        Route::get('schools','\App\Http\Controllers\Api\v1\SchoolsController@index'); 
+
     //Subjects
     Route::get('subjects','\App\Http\Controllers\Api\v1\SubjectsController@index');
 
