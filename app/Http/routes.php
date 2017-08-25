@@ -59,6 +59,8 @@ Route::group(['prefix'=>'api/v1'],function(){
         Route::get('artworks/{id}','\App\Http\Controllers\Api\v1\ArtworksController@show');
         Route::get('artworks/{id}/comments','\App\Http\Controllers\Api\v1\CommentsController@index');  
         Route::get('artworks/{id}/likes','\App\Http\Controllers\Api\v1\LikesController@index');     
+
+
     });
 
 
@@ -71,6 +73,12 @@ Route::group(['prefix'=>'api/v1'],function(){
         Route::post('artworks', '\App\Http\Controllers\Api\v1\ArtworksController@store');
         Route::put('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@update');
         Route::delete('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@destroy'); 
+    });
+
+    Route::group(['middleware'=>['jwt.auth','has.role:school']],function(){
+
+        //Students
+        Route::get('teachers/{id}/students','\App\Http\Controllers\Api\v1\StudentsController@students_by_teacher'); 
     });
 });
 

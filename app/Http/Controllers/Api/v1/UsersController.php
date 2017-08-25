@@ -183,8 +183,6 @@ class UsersController extends ApiController
     public function resetPassword(Request $request)
     {
         try{
-            throw new Exception("Error Processing Request", 1);
-            
             $validator = Validator::make($request->all(),[
                     'email' => 'required|email|exists:users,user_email',
                 ]);
@@ -193,7 +191,7 @@ class UsersController extends ApiController
                     return $this->respondValidationFailed($validator->errors());
 
             $credentials = $request->only(
-                'password', 'password_confirmation', 'token','email|mail'
+                'password', 'password_confirmation', 'token','email'
             );
             $credentials['user_email']=$credentials['email'];
             unset($credentials['email']);

@@ -1060,9 +1060,91 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/teachers/{id}/students",
+    "title": "Students List for specific teacher",
+    "name": "Students_List_for_specific_teacher_access_by_school_",
+    "description": "<p>Students List for specific teacher(access by  school role)</p>",
+    "group": "Students",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2017-10-05\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
     "url": "/students",
     "title": "Students List",
-    "name": "Students_List_access_by_teacher_",
+    "name": "Students_List_for_teacher_as_my_studets__access_by_teacher_",
+    "description": "<p>Students List for teacher as my studets -access by  teacher role-</p>",
     "group": "Students",
     "success": {
       "examples": [

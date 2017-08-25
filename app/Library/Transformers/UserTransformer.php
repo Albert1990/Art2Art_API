@@ -13,6 +13,8 @@ use App\Http\Enums\SocialPlatform;
 use App\Http\Helpers;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Artwork;
+use App\Library\Transformers\ArtworkTransformer;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends BaseTransformerAbstract{

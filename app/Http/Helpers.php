@@ -187,6 +187,9 @@ class Helpers {
         }
 
     }
+    public static function reverse_birthday( $age ){
+        return date('Y-m-d', strtotime($age . ' years ago'));
+    }
 
 
 //    public static function generateThumb($file,$filePath = "images/uploads",$prefix = "_thumb")
