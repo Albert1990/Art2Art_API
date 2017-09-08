@@ -85,91 +85,6 @@ define({ "api": [
     "groupTitle": "Artworks"
   },
   {
-    "type": "get",
-    "url": "/artworks",
-    "title": "Artworks List",
-    "name": "Artworks_List",
-    "group": "Artworks",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "age",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "keyword",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "school",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "curriculum",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "country",
-            "description": "<p>Optional (query parameter).</p>"
-          }
-        ]
-      }
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response: Without access token",
-          "content": "{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":\"\"},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":\"\"},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":\"\"}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
-          "type": "json"
-        },
-        {
-          "title": "Success-Response: With access token",
-          "content": "\n{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"921\",\"email\":\"shoshaho@hotmail.com\",\"first_name\":\"shoshaho\",\"last_name\":\"shoshaho\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},\"school\":{\"id\":\"909\",\"email\":\"mhd.oubaid@gmail.com\",\"name\":\"Oubaid\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "json",
-            "optional": false,
-            "field": "UNKNOWN_EXCEPTION",
-            "description": "<p>Unknown Exception.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
-    "groupTitle": "Artworks"
-  },
-  {
     "type": "delete",
     "url": "/artworks/{id}",
     "title": "Delete Artwork",
@@ -283,27 +198,45 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "String",
-            "description": "<p>title</p>"
+            "field": "title",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "File",
-            "description": "<p>image</p>"
+            "field": "tags",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "File",
             "optional": false,
-            "field": "Number",
-            "description": "<p>subjectId</p>"
+            "field": "image",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "Number",
             "optional": false,
-            "field": "Boolean",
-            "description": "<p>dispaly (0 privat ,1 public)</p>"
+            "field": "subjectId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "studentId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "comment",
+            "description": ""
           }
         ]
       }
@@ -359,27 +292,38 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "String",
-            "description": "<p>title</p>"
+            "field": "title",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "File",
-            "description": "<p>image</p>"
+            "field": "tags",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "File",
             "optional": false,
-            "field": "Date",
-            "description": "<p>creation_date</p>"
+            "field": "image",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "Date",
             "optional": false,
-            "field": "Boolean",
-            "description": "<p>dispaly (0 privat ,1 public)</p>"
+            "field": "creation_date",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "dispaly",
+            "description": "<p>(0 privat ,1 public)</p>"
           }
         ]
       }
@@ -678,6 +622,7 @@ define({ "api": [
     "url": "/auth/login",
     "title": "Login",
     "name": "UserLogin",
+    "description": "<p>this field shown just for student artwork_default_display_status</p>",
     "group": "Auth",
     "parameter": {
       "fields": {
@@ -703,7 +648,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\"data\":{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2017-10-05\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjk0NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTAwNzM0MDI0LCJleHAiOjE1MDA3NTIwMjQsIm5iZiI6MTUwMDczNDAyNCwianRpIjoiY0xud2dkUVZTRUZ4SWZEWCJ9.99WtzPOmqT5HKgMOIHlLsVunjbEwbkixVLElieJiZSA\"}}",
+          "content": "{\"data\":{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"artwork_default_display_status\":1,\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},\"message\":\"Item updated successfully\"}",
           "type": "json"
         }
       ]
@@ -811,15 +756,17 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "Number",
             "optional": false,
-            "field": "Number",
-            "description": "<p>artwork_id</p>"
+            "field": "artwork_id",
+            "description": ""
           },
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "String",
-            "description": "<p>comment</p>"
+            "field": "comment",
+            "description": ""
           }
         ]
       }
@@ -880,9 +827,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "String",
             "optional": false,
-            "field": "String",
-            "description": "<p>comment</p>"
+            "field": "comment",
+            "description": ""
           }
         ]
       }
@@ -1057,6 +1005,152 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
     "groupTitle": "Likes"
+  },
+  {
+    "type": "get",
+    "url": "/profile/artworks",
+    "title": "Artworks List",
+    "name": "Artworks_List",
+    "description": "<p>access by student</p>",
+    "group": "Profile",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: Without access token",
+          "content": "{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":\"\"},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":\"\"},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":\"\"}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response: With access token",
+          "content": "\n{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"921\",\"email\":\"shoshaho@hotmail.com\",\"first_name\":\"shoshaho\",\"last_name\":\"shoshaho\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},\"school\":{\"id\":\"909\",\"email\":\"mhd.oubaid@gmail.com\",\"name\":\"Oubaid\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "groupTitle": "Profile"
+  },
+  {
+    "type": "put",
+    "url": "/profile",
+    "title": "Update artwork default dispaly status",
+    "name": "Update_artwork_default_dispaly_status",
+    "description": "<p>Update artwork default dispaly status access by student</p>",
+    "group": "Profile",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "display",
+            "description": "<p>(0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"artwork_default_display_status\":1,\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ProfileController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "groupTitle": "Profile"
   },
   {
     "type": "get",

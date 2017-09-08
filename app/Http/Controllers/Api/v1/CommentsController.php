@@ -51,8 +51,8 @@ class CommentsController extends ApiController
      * @apiGroup Comments
      *
      *
-     * @apiParam Number artwork_id  
-     * @apiParam String comment 
+     * @apiParam {Number} artwork_id  
+     * @apiParam {String} comment 
      *
      *
      * @apiSuccessExample {json} Success-Response:
@@ -91,7 +91,7 @@ class CommentsController extends ApiController
      * @apiName Update Comment
      * @apiGroup Comments
      *
-     * @apiParam String comment 
+     * @apiParam {String} comment 
      *
      * @apiSuccessExample {json} Success-Response:
      * {"data":{"id":"36","artwork":20,"user":946,"comment":"comment test update"},"message":"Item updated successfully"}

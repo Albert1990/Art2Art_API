@@ -95,12 +95,12 @@ class ArtworksController extends ApiController
      * @apiGroup Artworks
      *
      *
-     * @apiParam String title 
-     * @apiParam String tags
-     * @apiParam File image
-     * @apiParam Number subjectId
-     * @apiParam String comment 
-     * @apiParam Boolean dispaly (0 privat ,1 public)
+     * @apiParam {String} title 
+     * @apiParam {String} tags
+     * @apiParam {File} image
+     * @apiParam {Number} subjectId
+     * @apiParam {Number} studentId
+     * @apiParam {String} comment 
      *
      *@apiSuccessExample {json} Success-Response: 
      * 
@@ -139,11 +139,11 @@ class ArtworksController extends ApiController
 
             $user=Auth::User();
 
-            $student = User::find($request->input('studentId',''))->first();
-
+            $student = User::find($request->input('studentId',''));
             $artwork_attributes = [
                 'art_title' => $request->input('title',''),
-                'art_display_status' => $request->input('display',''),
+                // 'art_display_status' => $request->input('display',''),
+                'art_display_status' => $student->user_artwork_default_display_status,
                 'art_keywords' =>$request->input('tags',''),
                 'art_subject_id' =>$request->input('subjectId',''),
                 'art_student_id' =>$request->input('studentId',''),
@@ -206,11 +206,11 @@ class ArtworksController extends ApiController
      * @apiGroup Artworks
      *
      *
-     * @apiParam String title 
-     * @apiParam String tags
-     * @apiParam File image
-     * @apiParam Date creation_date
-     * @apiParam Boolean dispaly (0 privat ,1 public)
+     * @apiParam {String} title 
+     * @apiParam {String} tags
+     * @apiParam {File} image
+     * @apiParam {Date} creation_date
+     * @apiParam {Boolean} dispaly (0 privat ,1 public)
      *
      *@apiSuccessExample {json} Success-Response: 
      * 

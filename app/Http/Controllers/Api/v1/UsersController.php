@@ -33,13 +33,14 @@ class UsersController extends ApiController
     /**
      * @api {post} /auth/login Login
      * @apiName UserLogin
+     * @apiDescription this field shown just for student artwork_default_display_status
      * @apiGroup Auth
      *
      * @apiParam {String} email Mandatory Email.
      * @apiParam {String} password Mandatory Password.
      *
      * @apiSuccessExample {json} Success-Response:
-     * {"data":{"id":"946","type":"student","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","address":"test","birthday":"2017-10-05","photo":"http://www.art2artgallery.com/public/img/default/default.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"},"school":{"id":"944","email":"shalabi.eng@gmail.com","name":"test school","photo":"http://www.art2artgallery.com/public/img/default/default.jpg","isActive":true,"isVerified":true,"country":{"id":"200","name":"Syria ","code":"00963"}},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjk0NiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDAwL2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTAwNzM0MDI0LCJleHAiOjE1MDA3NTIwMjQsIm5iZiI6MTUwMDczNDAyNCwianRpIjoiY0xud2dkUVZTRUZ4SWZEWCJ9.99WtzPOmqT5HKgMOIHlLsVunjbEwbkixVLElieJiZSA"}}
+     * {"data":{"id":"946","type":"student","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","artwork_default_display_status":1,"address":"test","birthday":"2000-10-05","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"},"school":{"id":"944","email":"shalabi.eng@gmail.com","name":"test school","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","country":{"id":"200","name":"Syria ","code":"00963"}}},"message":"Item updated successfully"}
      *
      *
      * @apiError UserNotFound User not found.

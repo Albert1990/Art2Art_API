@@ -38,9 +38,6 @@ Route::group(['prefix'=>'api/v1'],function(){
 
     Route::group(['middleware'=>'jwt.auth'],function(){
 
-        //profile
-        Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
-
         //Comments
         Route::post('comments', '\App\Http\Controllers\Api\v1\CommentsController@store');
         Route::put('comments/{id}', '\App\Http\Controllers\Api\v1\CommentsController@update');
@@ -66,7 +63,7 @@ Route::group(['prefix'=>'api/v1'],function(){
 
     });
 
-
+    //teacher role
     Route::group(['middleware'=>['jwt.auth','has.role:teacher']],function(){
 
         //Students
@@ -78,11 +75,22 @@ Route::group(['prefix'=>'api/v1'],function(){
         Route::delete('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@destroy'); 
     });
 
+    //school role
     Route::group(['middleware'=>['jwt.auth','has.role:school']],function(){
 
         //Students
         Route::get('teachers/{id}/students','\App\Http\Controllers\Api\v1\StudentsController@students_by_teacher'); 
     });
+
+    //student role
+    Route::group(['middleware'=>['jwt.auth','has.role:student']],function(){
+
+        //profile
+        Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
+        Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
+    });
+    
+
 });
 
 // Route::auth();

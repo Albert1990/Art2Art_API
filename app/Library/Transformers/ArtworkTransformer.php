@@ -44,7 +44,7 @@ class ArtworkTransformer extends BaseTransformerAbstract {
             'uploadedAt' => $item->art_upload_date,
             // 'status' => $item->art_status,
             // 'displayStatus' => $item->art_display_status,
-            'keywords' => $item->art_keywords,
+            'tags' => $item->art_keywords,
             'studentAge' => $item->art_student_age,
             'subject' =>($item->subject == null)?null:  Helpers::transformObject($item->subject, new SubjectTransformer()),
             'student' => ($user == null || $item->student == null)?null:Helpers::transformObject($item->student, new UserTransformer(true)),

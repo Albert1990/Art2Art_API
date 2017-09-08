@@ -16,4 +16,7 @@ CREATE TABLE `abcd_art`.`art_likes` (
  `like_art_id` INT NOT NULL ,
   PRIMARY KEY (`like_id`)) ENGINE = InnoDB;
 
+-- 
+
+ALTER TABLE `users` ADD `user_artwork_default_display_status` BOOLEAN NULL DEFAULT FALSE AFTER `user_pobox`;
 

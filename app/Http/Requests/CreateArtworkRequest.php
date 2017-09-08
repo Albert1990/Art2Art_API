@@ -26,7 +26,7 @@ class CreateArtworkRequest extends ApiRequest
         return [
             'title' => "required|string|min:2|max:100",
             'image' => 'required',
-            'display' => 'required|in:0,1',
+            // 'display' => 'required|in:0,1',
             'tags' => 'required|string',
             'subjectId' => 'required|integer|exists:subjects,sub_id',
             'studentId' =>'required|integer|exists:users,user_id',

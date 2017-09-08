@@ -48,6 +48,7 @@ class UserTransformer extends BaseTransformerAbstract{
                     'email' => $item->user_email,
                     'first_name' =>$item->user_first_name,
                     'last_name' =>$item->user_last_name,
+                    'gender' => $item->user_gender,
                     'photo' => Helpers::getUserImagePath(!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)),
                     'isActive' => $item->user_status == 1 ? true : false,
                     'isVerified' => $item->user_email_verified == 1 ? true : false,
@@ -62,7 +63,22 @@ class UserTransformer extends BaseTransformerAbstract{
             }
 
         }else{
-             if($item->user_type=='student' || $item->user_type=='teacher' ){
+             if($item->user_type=='student'){
+                $returned_date = $this->beatify([
+                    'id' => (string)$item->user_id,
+                    'type' =>$item->user_type,
+                    'email' => $item->user_email,
+                    'first_name' =>$item->user_first_name,
+                    'last_name' =>$item->user_last_name,
+                    'gender' => $item->user_gender,
+                    'artwork_default_display_status' => $item->user_artwork_default_display_status,
+                    'address' => $item->user_address,
+                    'birthday' => $item->user_dob,
+                    'photo' => Helpers::getUserImagePath(!($item->user_image && $item->user_image_verified)? $this->default_user_image:($item->user_image)),
+                    'isActive' => $item->user_status == 1 ? true : false,
+                    'isVerified' => $item->user_email_verified == 1 ? true : false,
+                ]);
+            }elseif($item->user_type=='teacher' ){
                 $returned_date = $this->beatify([
                     'id' => (string)$item->user_id,
                     'type' =>$item->user_type,
