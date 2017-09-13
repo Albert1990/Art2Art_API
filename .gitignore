@@ -8,4 +8,4 @@ Homestead.json
 .env
 .idea/*
 
-/public/images/
+#/public/images/
