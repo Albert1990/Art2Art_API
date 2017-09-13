@@ -89,6 +89,53 @@ class ArtworksController extends ApiController
         }
     }
 
+/**
+     * @api {get} /students/{id}/artworks  Student Artworks List
+     * @apiName Student Artworks List
+     * @apiDescription Student Artworks -access by  teacher role-
+     * @apiGroup Students
+     *
+     * @apiSuccessExample {json} Success-Response: 
+     * 
+     *{"data":[{"id":"28","title":"new","comment_1":"ssssss","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg","createdAt":"2017-07-29","uploadedAt":"2017-07-29","tags":"Eid,Festival","studentAge":3,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"30","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"31","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"32","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}}],"paginator":{"total_count":4,"total_pages":1,"current_page":1,"limit":10}}
+     * @apiError {json} UNKNOWN_EXCEPTION Unknown Exception.
+     *
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in \/Api\/v1\/ArtworksController.php in Line :127","details":[]}}
+     */
+    public function artworks_by_student($student_id)
+    {
+        $parameters = request()->input();
+        // $withKeys = $this->getWithKeys($parameters);
+        $whereClauses = $this->getWhereClause($parameters);
+        $whereClauses['normal_type']['art_student_id']= $student_id;
+        try {
+            $limit = Helpers::getPaginationLimit(Input::get('limit') );
+
+            $artworks = Artwork::where(function($q) use ($whereClauses){
+                        foreach($whereClauses['like_type'] as $key => $value){
+                            $q->orWhere($key, 'LIKE', $value);
+                        }
+                        foreach($whereClauses['in_type'] as $key => $value){
+                            if(empty($value)){
+                                $value=['-1'];
+                            }
+                            $q->whereIn($key,$value);
+                        }
+                        foreach($whereClauses['normal_type'] as $key => $value){
+                            $q->where($key,$value);
+                        }
+                    })->paginate($limit);
+
+            return $this->respondWithPagination($artworks, [
+                'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
+            ]);
+
+        } catch (Exception $ex) {
+            return $this->respondUnknownException($ex);
+        }
+    }
+
   /**
      * @api {post} /artworks Store Artwork
      * @apiName Store Artwork

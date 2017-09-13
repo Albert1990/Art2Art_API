@@ -68,6 +68,7 @@ Route::group(['prefix'=>'api/v1'],function(){
 
         //Students
         Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index'); 
+        Route::get('students/{id}/artworks','\App\Http\Controllers\Api\v1\ArtworksController@artworks_by_student'); 
 
         //Artworks
         Route::post('artworks', '\App\Http\Controllers\Api\v1\ArtworksController@store');
