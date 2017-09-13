@@ -80,11 +80,20 @@ class Helpers {
     public static function getUserImagePath($file)
     {
         return asset('/public/images/uploads/users/'.$file);
+        if(file_exists(public_path().'/images/uploads/users/'.$file)){
+            return asset('/images/uploads/users/'.$file);
+        }else{
+           return 'http://www.art2artgallery.com/public/resources/profile_images/'.$file; 
+        }
     }
 
     public static function getArtworkImagePath($type,$file)
     {
-        return asset('/public/images/uploads/arts/'.$type.$file);
+        if(file_exists(public_path().'/images/uploads/arts/'.$type.$file)){
+            return asset('/images/uploads/arts/'.$type.$file);
+        }else{
+           return 'http://www.art2artgallery.com/public/resources/art_images/'.$type.$file; 
+        }
     }
 
     public static function generateQrCode()
