@@ -1,1 +1,1494 @@
-define({ "api": [  {    "type": "post",    "url": "/auth/forgetPassword",    "title": "Forget Password",    "name": "ForgetPassword",    "group": "Auth",    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "email",            "description": "<p>User email</p>"          }        ]      }    },    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":[],\"message\":\"RESET_LINK_SENT\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "VALIDATION_ERROR",            "description": "<p>validation failed</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": ""          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"INVALID_USER\",\"message\":\"We couldn't find your account with that information.\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/UsersController.php",    "groupTitle": "Auth"  },  {    "type": "post",    "url": "/auth/resetPassword",    "title": "Reset Password",    "name": "ResetPassword",    "group": "Auth",    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "string",            "optional": false,            "field": "email",            "description": "<p>user email.</p>"          },          {            "group": "Parameter",            "type": "string",            "optional": false,            "field": "token",            "description": "<p>Reset password token</p>"          },          {            "group": "Parameter",            "type": "string",            "optional": false,            "field": "password",            "description": "<p>New password</p>"          },          {            "group": "Parameter",            "type": "string",            "optional": false,            "field": "password_confirmation",            "description": "<p>New password confirmation</p>"          }        ]      }    },    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":[],\"message\":\"PASSWORD_RESET\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "VALIDATION_ERROR",            "description": "<p>validation failed</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": ""          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"CANT_RESET_PASSWORD\",\"message\":\"Could not reset password\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/UsersController.php",    "groupTitle": "Auth"  },  {    "type": "post",    "url": "/auth/login",    "title": "Login",    "name": "UserLogin",    "group": "Auth",    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "email",            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "password",            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "socialId",            "description": "<p>user social id.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "socialPlatform",            "description": "<p>(FACEBOOK,GOOGLE_PLUS,TWITTER).</p>"          }        ]      }    },    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"id\":\"1\",\"email\":\"samer.shatta@gmail.com\",\"name\":\"admin\",\"gender\":\"MALE\",\"phone\":\"+96176309032\",\"address\":\"\",\"birthday\":\"2017-06-23 03:29:54\",\"photo\":\"http:\\/\\/localhost:3008\\/images\\/uploads\\/users\\/default-user.jpg\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwOC9hcGkvdjEvYXV0aC9sb2dpbiIsImlhdCI6MTQ5ODI1MDY3MSwiZXhwIjoxNDk4MjU0MjcxLCJuYmYiOjE0OTgyNTA2NzEsImp0aSI6Im41TjM2QXlXeGlnVEtGVnkifQ.X75kGpGG6lVwqjz21o7X34jgeiEcdhyD-lITEMz49p4\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"760\",\"name\":\"Syrian Arab Republic\"}}}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "optional": false,            "field": "UserNotFound",            "description": "<p>User not found.</p>"          },          {            "group": "Error 4xx",            "optional": false,            "field": "ValidationError",            "description": "<p>validation error.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"INCORRECT_EMAIL_OR_PASSWORD\",\"message\":\"Email or password incorrect!!\",\"details\":[]}}",          "type": "json"        },        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"password\":[\"The password field is required.\"]}}}",          "type": "json"        },        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/UsersController.php",    "groupTitle": "Auth"  },  {    "type": "post",    "url": "/auth/register",    "title": "Register",    "name": "UserRegister",    "group": "Auth",    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "email",            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "password",            "description": "<p>(optional if social_id &amp; social_platform are exists).</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "name",            "description": "<p>full name of the User.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "phone",            "description": "<p>phone of the User.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "gender",            "description": "<p>gender of the User (MALE | FEMALE).</p>"          },          {            "group": "Parameter",            "type": "Date",            "optional": false,            "field": "birthday",            "description": "<p>birthday of the User (UTC format 2017-07-19 21:16:04.000000).</p>"          },          {            "group": "Parameter",            "type": "Number",            "optional": false,            "field": "countryId",            "description": "<p>user country id.</p>"          },          {            "group": "Parameter",            "type": "File",            "optional": true,            "field": "photo",            "description": "<p>user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": true,            "field": "socialId",            "description": "<p>user social platform id.</p>"          },          {            "group": "Parameter",            "type": "Number",            "optional": true,            "field": "socialPlatform",            "description": "<p>(FACEBOOK, GOOGLE_PLUS,TWITTER).</p>"          }        ]      }    },    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"id\":\"2\",\"email\":\"\",\"name\":\"samer shatta\",\"gender\":\"MALE\",\"phone\":\"76309032\",\"address\":\"\",\"birthday\":\"11\\/09\\/1990\",\"photo\":\"https:\\/\\/graph.facebook.com\\/bbbdgdg\\/picture?type=normal\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwOC9hcGkvdjEvYXV0aC9yZWdpc3RlciIsImlhdCI6MTQ5ODE4OTgyNSwiZXhwIjoxNDk4MTkzNDI1LCJuYmYiOjE0OTgxODk4MjUsImp0aSI6IjNhSm5PNHZOODFOQWtWWEsifQ.H3L-bgou3hT7q5a7vYSDm1l2G8Xh7wc8gcibVusb1cM\",\"isActive\":true,\"isVerified\":\"\",\"country\":{\"id\":\"4\",\"name\":\"Afghanistan\"}}}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "optional": false,            "field": "ValidationError",            "description": "<p>Validation error.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"USER_EXIST_BEFORE\",\"message\":\"\",\"details\":[]}}",          "type": "json"        },        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/UsersController.php",    "groupTitle": "Auth"  },  {    "type": "get",    "url": "/categories",    "title": "Categories List",    "name": "Categories_List",    "group": "Categories",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":[{\"id\":\"1\",\"nameEn\":\"cat1\",\"nameAr\":\"\\u0635\\u0646\\u0641\\u0661\",\"cover\":\"\",\"icon\":\"\"},{\"id\":\"2\",\"nameEn\":\"cat2\",\"nameAr\":\"\\u0635\\u0646\\u0641\\u0662\",\"cover\":\"\",\"icon\":\"\"}]}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CategoriesController.php",    "groupTitle": "Categories"  },  {    "type": "delete",    "url": "/categories/{id}",    "title": "Delete Category",    "name": "Delete_Category",    "group": "Categories",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"message\":\"Item deleted successfully\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "MODEL_NOT_FOUND",            "description": "<p>MODEL NOT FOUND.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CategoriesController.php",    "groupTitle": "Categories"  },  {    "type": "get",    "url": "/categories/{id}",    "title": "Get Category",    "name": "Get_Category",    "group": "Categories",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"id\":\"2\",\"nameEn\":\"cat2\",\"nameAr\":\"\\u0635\\u0646\\u0641\\u0662\",\"cover\":\"\",\"icon\":\"\"}}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "MODEL_NOT_FOUND",            "description": "<p>MODEL NOT FOUND.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"MODEL_NOT_FOUND\",\"message\":\"\",\"details\":[]}}",          "type": "json"        },        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CategoriesController.php",    "groupTitle": "Categories"  },  {    "type": "post",    "url": "/categories",    "title": "Store Category",    "name": "Store_Category",    "group": "Categories",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"data\":{\"id\":\"4\",\"nameEn\":\"toto\",\"nameAr\":\"\\u062a\\u0648\\u062a\\u0648\",\"cover\":\"\",\"icon\":\"\"}},\"message\":\"Item created successfully\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "VALIDATION_ERROR",            "description": "<p>validation failed</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CategoriesController.php",    "groupTitle": "Categories"  },  {    "type": "put",    "url": "/categories",    "title": "Update Category",    "name": "Update_Category",    "group": "Categories",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"data\":{\"id\":\"2\",\"nameEn\":\"koko\",\"nameAr\":\"\\u0643\\u0648\\u0643\\u0648\",\"cover\":\"\",\"icon\":\"\"}},\"message\":\"Item updated successfully\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "MODEL_NOT_FOUND",            "description": "<p>MODEL NOT FOUND.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "VALIDATION_ERROR",            "description": "<p>validation failed</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CategoriesController.php",    "groupTitle": "Categories"  },  {    "type": "get",    "url": "/countries",    "title": "Countries List",    "name": "Countries_List",    "group": "Countries",    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":[{\"id\":\"4\",\"name\":\"Afghanistan\"},{\"id\":\"8\",\"name\":\"Albania\"},{\"id\":\"10\",\"name\":\"Antarctica\"},{\"id\":\"12\",\"name\":\"Algeria\"},{\"id\":\"16\",\"name\":\"American Samoa\"},{\"id\":\"20\",\"name\":\"Andorra\"},{\"id\":\"24\",\"name\":\"Angola\"},{\"id\":\"28\",\"name\":\"Antigua and Barbuda\"},{\"id\":\"31\",\"name\":\"Azerbaijan\"},{\"id\":\"32\",\"name\":\"Argentina\"},{\"id\":\"36\",\"name\":\"Australia\"},{\"id\":\"40\",\"name\":\"Austria\"},{\"id\":\"44\",\"name\":\"Bahamas\"},{\"id\":\"48\",\"name\":\"Bahrain\"},{\"id\":\"50\",\"name\":\"Bangladesh\"},{\"id\":\"51\",\"name\":\"Armenia\"},{\"id\":\"52\",\"name\":\"Barbados\"},{\"id\":\"56\",\"name\":\"Belgium\"},{\"id\":\"60\",\"name\":\"Bermuda\"},{\"id\":\"64\",\"name\":\"Bhutan\"},{\"id\":\"68\",\"name\":\"Bolivia, Plurinational State of\"},{\"id\":\"70\",\"name\":\"Bosnia and Herzegovina\"},{\"id\":\"72\",\"name\":\"Botswana\"},{\"id\":\"74\",\"name\":\"Bouvet Island\"},{\"id\":\"76\",\"name\":\"Brazil\"},{\"id\":\"84\",\"name\":\"Belize\"},{\"id\":\"86\",\"name\":\"British Indian Ocean Territory\"},{\"id\":\"90\",\"name\":\"Solomon Islands\"},{\"id\":\"92\",\"name\":\"Virgin Islands, British\"},{\"id\":\"96\",\"name\":\"Brunei Darussalam\"},{\"id\":\"100\",\"name\":\"Bulgaria\"},{\"id\":\"104\",\"name\":\"Myanmar\"},{\"id\":\"108\",\"name\":\"Burundi\"},{\"id\":\"112\",\"name\":\"Belarus\"},{\"id\":\"116\",\"name\":\"Cambodia\"},{\"id\":\"120\",\"name\":\"Cameroon\"},{\"id\":\"124\",\"name\":\"Canada\"},{\"id\":\"132\",\"name\":\"Cape Verde\"},{\"id\":\"136\",\"name\":\"Cayman Islands\"},{\"id\":\"140\",\"name\":\"Central African Republic\"},{\"id\":\"144\",\"name\":\"Sri Lanka\"},{\"id\":\"148\",\"name\":\"Chad\"},{\"id\":\"152\",\"name\":\"Chile\"},{\"id\":\"156\",\"name\":\"China\"},{\"id\":\"158\",\"name\":\"Taiwan, Province of China\"},{\"id\":\"162\",\"name\":\"Christmas Island\"},{\"id\":\"166\",\"name\":\"Cocos (Keeling) Islands\"},{\"id\":\"170\",\"name\":\"Colombia\"},{\"id\":\"174\",\"name\":\"Comoros\"},{\"id\":\"175\",\"name\":\"Mayotte\"},{\"id\":\"178\",\"name\":\"Congo\"},{\"id\":\"180\",\"name\":\"Congo, the Democratic Republic of the\"},{\"id\":\"184\",\"name\":\"Cook Islands\"},{\"id\":\"188\",\"name\":\"Costa Rica\"},{\"id\":\"191\",\"name\":\"Croatia\"},{\"id\":\"192\",\"name\":\"Cuba\"},{\"id\":\"196\",\"name\":\"Cyprus\"},{\"id\":\"203\",\"name\":\"Czech Republic\"},{\"id\":\"204\",\"name\":\"Benin\"},{\"id\":\"208\",\"name\":\"Denmark\"},{\"id\":\"212\",\"name\":\"Dominica\"},{\"id\":\"214\",\"name\":\"Dominican Republic\"},{\"id\":\"218\",\"name\":\"Ecuador\"},{\"id\":\"222\",\"name\":\"El Salvador\"},{\"id\":\"226\",\"name\":\"Equatorial Guinea\"},{\"id\":\"231\",\"name\":\"Ethiopia\"},{\"id\":\"232\",\"name\":\"Eritrea\"},{\"id\":\"233\",\"name\":\"Estonia\"},{\"id\":\"234\",\"name\":\"Faroe Islands\"},{\"id\":\"238\",\"name\":\"Falkland Islands (Malvinas)\"},{\"id\":\"239\",\"name\":\"South Georgia and the South Sandwich Islands\"},{\"id\":\"242\",\"name\":\"Fiji\"},{\"id\":\"246\",\"name\":\"Finland\"},{\"id\":\"248\",\"name\":\"\\u00c5land Islands\"},{\"id\":\"250\",\"name\":\"France\"},{\"id\":\"254\",\"name\":\"French Guiana\"},{\"id\":\"258\",\"name\":\"French Polynesia\"},{\"id\":\"260\",\"name\":\"French Southern Territories\"},{\"id\":\"262\",\"name\":\"Djibouti\"},{\"id\":\"266\",\"name\":\"Gabon\"},{\"id\":\"268\",\"name\":\"Georgia\"},{\"id\":\"270\",\"name\":\"Gambia\"},{\"id\":\"275\",\"name\":\"Palestinian Territory, Occupied\"},{\"id\":\"276\",\"name\":\"Germany\"},{\"id\":\"288\",\"name\":\"Ghana\"},{\"id\":\"292\",\"name\":\"Gibraltar\"},{\"id\":\"296\",\"name\":\"Kiribati\"},{\"id\":\"300\",\"name\":\"Greece\"},{\"id\":\"304\",\"name\":\"Greenland\"},{\"id\":\"308\",\"name\":\"Grenada\"},{\"id\":\"312\",\"name\":\"Guadeloupe\"},{\"id\":\"316\",\"name\":\"Guam\"},{\"id\":\"320\",\"name\":\"Guatemala\"},{\"id\":\"324\",\"name\":\"Guinea\"},{\"id\":\"328\",\"name\":\"Guyana\"},{\"id\":\"332\",\"name\":\"Haiti\"},{\"id\":\"334\",\"name\":\"Heard Island and McDonald Islands\"},{\"id\":\"336\",\"name\":\"Holy See (Vatican City State)\"},{\"id\":\"340\",\"name\":\"Honduras\"},{\"id\":\"344\",\"name\":\"Hong Kong\"},{\"id\":\"348\",\"name\":\"Hungary\"},{\"id\":\"352\",\"name\":\"Iceland\"},{\"id\":\"356\",\"name\":\"India\"},{\"id\":\"360\",\"name\":\"Indonesia\"},{\"id\":\"364\",\"name\":\"Iran, Islamic Republic of\"},{\"id\":\"368\",\"name\":\"Iraq\"},{\"id\":\"372\",\"name\":\"Ireland\"},{\"id\":\"376\",\"name\":\"Israel\"},{\"id\":\"380\",\"name\":\"Italy\"},{\"id\":\"384\",\"name\":\"C\\u00f4te d'Ivoire\"},{\"id\":\"388\",\"name\":\"Jamaica\"},{\"id\":\"392\",\"name\":\"Japan\"},{\"id\":\"398\",\"name\":\"Kazakhstan\"},{\"id\":\"400\",\"name\":\"Jordan\"},{\"id\":\"404\",\"name\":\"Kenya\"},{\"id\":\"408\",\"name\":\"Korea, Democratic People's Republic of\"},{\"id\":\"410\",\"name\":\"Korea, Republic of\"},{\"id\":\"414\",\"name\":\"Kuwait\"},{\"id\":\"417\",\"name\":\"Kyrgyzstan\"},{\"id\":\"418\",\"name\":\"Lao People's Democratic Republic\"},{\"id\":\"422\",\"name\":\"Lebanon\"},{\"id\":\"426\",\"name\":\"Lesotho\"},{\"id\":\"428\",\"name\":\"Latvia\"},{\"id\":\"430\",\"name\":\"Liberia\"},{\"id\":\"434\",\"name\":\"Libya\"},{\"id\":\"438\",\"name\":\"Liechtenstein\"},{\"id\":\"440\",\"name\":\"Lithuania\"},{\"id\":\"442\",\"name\":\"Luxembourg\"},{\"id\":\"446\",\"name\":\"Macao\"},{\"id\":\"450\",\"name\":\"Madagascar\"},{\"id\":\"454\",\"name\":\"Malawi\"},{\"id\":\"458\",\"name\":\"Malaysia\"},{\"id\":\"462\",\"name\":\"Maldives\"},{\"id\":\"466\",\"name\":\"Mali\"},{\"id\":\"470\",\"name\":\"Malta\"},{\"id\":\"474\",\"name\":\"Martinique\"},{\"id\":\"478\",\"name\":\"Mauritania\"},{\"id\":\"480\",\"name\":\"Mauritius\"},{\"id\":\"484\",\"name\":\"Mexico\"},{\"id\":\"492\",\"name\":\"Monaco\"},{\"id\":\"496\",\"name\":\"Mongolia\"},{\"id\":\"498\",\"name\":\"Moldova, Republic of\"},{\"id\":\"499\",\"name\":\"Montenegro\"},{\"id\":\"500\",\"name\":\"Montserrat\"},{\"id\":\"504\",\"name\":\"Morocco\"},{\"id\":\"508\",\"name\":\"Mozambique\"},{\"id\":\"512\",\"name\":\"Oman\"},{\"id\":\"516\",\"name\":\"Namibia\"},{\"id\":\"520\",\"name\":\"Nauru\"},{\"id\":\"524\",\"name\":\"Nepal\"},{\"id\":\"528\",\"name\":\"Netherlands\"},{\"id\":\"531\",\"name\":\"Cura\\u00e7ao\"},{\"id\":\"533\",\"name\":\"Aruba\"},{\"id\":\"534\",\"name\":\"Sint Maarten (Dutch part)\"},{\"id\":\"535\",\"name\":\"Bonaire, Sint Eustatius and Saba\"},{\"id\":\"540\",\"name\":\"New Caledonia\"},{\"id\":\"548\",\"name\":\"Vanuatu\"},{\"id\":\"554\",\"name\":\"New Zealand\"},{\"id\":\"558\",\"name\":\"Nicaragua\"},{\"id\":\"562\",\"name\":\"Niger\"},{\"id\":\"566\",\"name\":\"Nigeria\"},{\"id\":\"570\",\"name\":\"Niue\"},{\"id\":\"574\",\"name\":\"Norfolk Island\"},{\"id\":\"578\",\"name\":\"Norway\"},{\"id\":\"580\",\"name\":\"Northern Mariana Islands\"},{\"id\":\"581\",\"name\":\"United States Minor Outlying Islands\"},{\"id\":\"583\",\"name\":\"Micronesia, Federated States of\"},{\"id\":\"584\",\"name\":\"Marshall Islands\"},{\"id\":\"585\",\"name\":\"Palau\"},{\"id\":\"586\",\"name\":\"Pakistan\"},{\"id\":\"591\",\"name\":\"Panama\"},{\"id\":\"598\",\"name\":\"Papua New Guinea\"},{\"id\":\"600\",\"name\":\"Paraguay\"},{\"id\":\"604\",\"name\":\"Peru\"},{\"id\":\"608\",\"name\":\"Philippines\"},{\"id\":\"612\",\"name\":\"Pitcairn\"},{\"id\":\"616\",\"name\":\"Poland\"},{\"id\":\"620\",\"name\":\"Portugal\"},{\"id\":\"624\",\"name\":\"Guinea-Bissau\"},{\"id\":\"626\",\"name\":\"Timor-Leste\"},{\"id\":\"630\",\"name\":\"Puerto Rico\"},{\"id\":\"634\",\"name\":\"Qatar\"},{\"id\":\"638\",\"name\":\"R\\u00e9union\"},{\"id\":\"642\",\"name\":\"Romania\"},{\"id\":\"643\",\"name\":\"Russian Federation\"},{\"id\":\"646\",\"name\":\"Rwanda\"},{\"id\":\"652\",\"name\":\"Saint Barth\\u00e9lemy\"},{\"id\":\"654\",\"name\":\"Saint Helena, Ascension and Tristan da Cunha\"},{\"id\":\"659\",\"name\":\"Saint Kitts and Nevis\"},{\"id\":\"660\",\"name\":\"Anguilla\"},{\"id\":\"662\",\"name\":\"Saint Lucia\"},{\"id\":\"663\",\"name\":\"Saint Martin (French part)\"},{\"id\":\"666\",\"name\":\"Saint Pierre and Miquelon\"},{\"id\":\"670\",\"name\":\"Saint Vincent and the Grenadines\"},{\"id\":\"674\",\"name\":\"San Marino\"},{\"id\":\"678\",\"name\":\"Sao Tome and Principe\"},{\"id\":\"682\",\"name\":\"Saudi Arabia\"},{\"id\":\"686\",\"name\":\"Senegal\"},{\"id\":\"688\",\"name\":\"Serbia\"},{\"id\":\"690\",\"name\":\"Seychelles\"},{\"id\":\"694\",\"name\":\"Sierra Leone\"},{\"id\":\"702\",\"name\":\"Singapore\"},{\"id\":\"703\",\"name\":\"Slovakia\"},{\"id\":\"704\",\"name\":\"Viet Nam\"},{\"id\":\"705\",\"name\":\"Slovenia\"},{\"id\":\"706\",\"name\":\"Somalia\"},{\"id\":\"710\",\"name\":\"South Africa\"},{\"id\":\"716\",\"name\":\"Zimbabwe\"},{\"id\":\"724\",\"name\":\"Spain\"},{\"id\":\"728\",\"name\":\"South Sudan\"},{\"id\":\"729\",\"name\":\"Sudan\"},{\"id\":\"732\",\"name\":\"Western Sahara\"},{\"id\":\"740\",\"name\":\"Suriname\"},{\"id\":\"744\",\"name\":\"Svalbard and Jan Mayen\"},{\"id\":\"748\",\"name\":\"Swaziland\"},{\"id\":\"752\",\"name\":\"Sweden\"},{\"id\":\"756\",\"name\":\"Switzerland\"},{\"id\":\"760\",\"name\":\"Syrian Arab Republic\"},{\"id\":\"762\",\"name\":\"Tajikistan\"},{\"id\":\"764\",\"name\":\"Thailand\"},{\"id\":\"768\",\"name\":\"Togo\"},{\"id\":\"772\",\"name\":\"Tokelau\"},{\"id\":\"776\",\"name\":\"Tonga\"},{\"id\":\"780\",\"name\":\"Trinidad and Tobago\"},{\"id\":\"784\",\"name\":\"United Arab Emirates\"},{\"id\":\"788\",\"name\":\"Tunisia\"},{\"id\":\"792\",\"name\":\"Turkey\"},{\"id\":\"795\",\"name\":\"Turkmenistan\"},{\"id\":\"796\",\"name\":\"Turks and Caicos Islands\"},{\"id\":\"798\",\"name\":\"Tuvalu\"},{\"id\":\"800\",\"name\":\"Uganda\"},{\"id\":\"804\",\"name\":\"Ukraine\"},{\"id\":\"807\",\"name\":\"Macedonia, the former Yugoslav Republic of\"},{\"id\":\"818\",\"name\":\"Egypt\"},{\"id\":\"826\",\"name\":\"United Kingdom\"},{\"id\":\"831\",\"name\":\"Guernsey\"},{\"id\":\"832\",\"name\":\"Jersey\"},{\"id\":\"833\",\"name\":\"Isle of Man\"},{\"id\":\"834\",\"name\":\"Tanzania, United Republic of\"},{\"id\":\"840\",\"name\":\"United States\"},{\"id\":\"850\",\"name\":\"Virgin Islands, U.S.\"},{\"id\":\"854\",\"name\":\"Burkina Faso\"},{\"id\":\"858\",\"name\":\"Uruguay\"},{\"id\":\"860\",\"name\":\"Uzbekistan\"},{\"id\":\"862\",\"name\":\"Venezuela, Bolivarian Republic of\"},{\"id\":\"876\",\"name\":\"Wallis and Futuna\"},{\"id\":\"882\",\"name\":\"Samoa\"},{\"id\":\"887\",\"name\":\"Yemen\"},{\"id\":\"894\",\"name\":\"Zambia\"}]}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/CountriesController.php",    "groupTitle": "Countries"  },  {    "type": "put",    "url": "/users",    "title": "Update User Profile",    "header": {      "fields": {        "Header": [          {            "group": "Header",            "type": "string",            "optional": false,            "field": "token",            "description": "<p>User Auth Token</p>"          }        ]      }    },    "name": "UpdateUserProfile",    "group": "Users",    "parameter": {      "fields": {        "Parameter": [          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "name",            "description": "<p>name of the User.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "phone",            "description": "<p>phone of the User.</p>"          },          {            "group": "Parameter",            "type": "String",            "optional": false,            "field": "gender",            "description": "<p>gender of the User (MALE | FEMALE).</p>"          },          {            "group": "Parameter",            "type": "Date",            "optional": false,            "field": "birthday",            "description": "<p>birthday of the User (UTC format 2017-07-19 21:16:04.000000).</p>"          },          {            "group": "Parameter",            "type": "Number",            "optional": false,            "field": "countryId",            "description": "<p>user country id.</p>"          },          {            "group": "Parameter",            "type": "File",            "optional": true,            "field": "photo",            "description": "<p>user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).</p>"          }        ]      }    },    "success": {      "examples": [        {          "title": "Success-Response:",          "content": "{\"data\":{\"id\":\"1\",\"email\":\"samer.shatta@gmail.com\",\"name\":\"Ziad shatta\",\"gender\":\"FEMALE\",\"phone\":\"76309032\",\"address\":\"\",\"birthday\":\"11\\/09\\/1990\",\"photo\":\"http:\\/\\/localhost:3008\\/images\\/uploads\\/users\\/default-user.jpg\",\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwOC9hcGkvdjEvdXNlcnMiLCJpYXQiOjE0OTgyNTE1NzYsImV4cCI6MTQ5ODI1NTE3NiwibmJmIjoxNDk4MjUxNTc2LCJqdGkiOiJMSHBCQmJQYld3YXpuT2xXIn0.jpk6zH5wf9Rdy-XzP_FbqINmuS0jTZVV6JvjfXPXY7U\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"4\",\"name\":\"Afghanistan\"}},\"message\":\"Item updated successfully\"}",          "type": "json"        }      ]    },    "error": {      "fields": {        "Error 4xx": [          {            "group": "Error 4xx",            "optional": false,            "field": "ValidationError",            "description": "<p>Validation error.</p>"          },          {            "group": "Error 4xx",            "type": "String",            "optional": false,            "field": "UNKNOWN_EXCEPTION",            "description": "<p>Unknown Exception.</p>"          }        ]      },      "examples": [        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"USER_EXIST_BEFORE\",\"message\":\"\",\"details\":[]}}",          "type": "json"        },        {          "title": "Error-Response:",          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",          "type": "json"        }      ]    },    "version": "0.0.0",    "filename": "app/Http/Controllers/Api/v1/UsersController.php",    "groupTitle": "Users"  }] });
+define({ "api": [
+  {
+    "type": "get",
+    "url": "/artworks",
+    "title": "Artworks List",
+    "name": "Artworks_List",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: Without access token",
+          "content": "{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":\"\"},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":\"\"},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":\"\"}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response: With access token",
+          "content": "\n{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"921\",\"email\":\"shoshaho@hotmail.com\",\"first_name\":\"shoshaho\",\"last_name\":\"shoshaho\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},\"school\":{\"id\":\"909\",\"email\":\"mhd.oubaid@gmail.com\",\"name\":\"Oubaid\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "delete",
+    "url": "/artworks/{id}",
+    "title": "Delete Artwork",
+    "name": "Delete_Artwork",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"Item deleted successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
+    "url": "/artworks/{id}",
+    "title": "Show Artwork",
+    "name": "Show_Artwork",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Artwork unique ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: Without access token",
+          "content": "\n{\"data\":{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"}}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response: With access token",
+          "content": "\n{\"data\":{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/_file5985eae3513f0.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/_file5985eae3513f0.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/_file5985eae3513f0.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/_file5985eae3513f0.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/_file5985eae3513f0.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/_file5985eae3513f0.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "post",
+    "url": "/artworks",
+    "title": "Store Artwork",
+    "name": "Store_Artwork",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "subjectId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "studentId",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "comment",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":{\"id\":\"29\",\"title\":\"eeeeee\",\"comment_1\":\"comment text\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/_file5985eae3513f0.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/_file5985eae3513f0.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/_file5985eae3513f0.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/_file5985eae3513f0.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/_file5985eae3513f0.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/_file5985eae3513f0.jpg\",\"createdAt\":\"2017-08-05\",\"uploadedAt\":\"2017-08-05\",\"keywords\":\"ttt,ttt\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "put",
+    "url": "/artworks/{id}",
+    "title": "Update Artwork",
+    "name": "Update_Artwork",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "tags",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "image",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "creation_date",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "dispaly",
+            "description": "<p>(0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":{\"id\":\"29\",\"title\":\"eeeeee\",\"comment_1\":\"comment text\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/_file5985eae3513f0.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/_file5985eae3513f0.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/_file5985eae3513f0.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/_file5985eae3513f0.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/_file5985eae3513f0.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/_file5985eae3513f0.jpg\",\"createdAt\":\"2017-08-05\",\"uploadedAt\":\"2017-08-05\",\"keywords\":\"ttt,ttt\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "put",
+    "url": "/artworks/{id}",
+    "title": "Update Artwork Display Status",
+    "name": "Update_Artwork_Display_by_student_",
+    "description": "<p>Update Artwork Display Status (access by student)</p>",
+    "group": "Artworks",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "dispaly",
+            "description": "<p>(0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"status\":\"1\",\"displayStatus\":\"\",\"tags\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
+    "url": "/artworks/{id}/comments",
+    "title": "comments List",
+    "name": "comments_List",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"25\",\"artwork\":20,\"user\":{\"id\":\"939\",\"email\":\"molham.mah@gmail.com\",\"first_name\":\"Tarazan\",\"last_name\":\"tr\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"comment\":\"school gallery opening day\"},{\"id\":\"35\",\"artwork\":20,\"user\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}},\"comment\":\"comment mmmm put\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/commentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "get",
+    "url": "/artworks/{id}/likes",
+    "title": "Likes List",
+    "name": "likes_List",
+    "group": "Artworks",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/commentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
+    "groupTitle": "Artworks"
+  },
+  {
+    "type": "post",
+    "url": "/auth/forget_password",
+    "title": "Forget Password",
+    "name": "ForgetPassword",
+    "group": "Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"RESET_LINK_SENT\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "INVALID_USER",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"CANT_RESET_PASSWORD\",\"message\":\"Could not reset password\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: VALIDATION_ERROR",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"email\":[\"The email must be a valid email address.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: UNKNOWN_EXCEPTION",
+          "content": "\n{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\"Error Processing Request in /Api/v1/UsersController.php in Line :296\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"INVALID_USER\",\"message\":\"We couldn't find your account with that information.\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "groupTitle": "Auth"
+  },
+  {
+    "type": "post",
+    "url": "/auth/reset_password",
+    "title": "Reset Password",
+    "name": "ResetPassword",
+    "group": "Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "email",
+            "description": "<p>user email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Reset password token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password",
+            "description": "<p>New password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "password_confirmation",
+            "description": "<p>New password confirmation</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"PASSWORD_RESET\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"CANT_RESET_PASSWORD\",\"message\":\"Could not reset password\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: VALIDATION_ERROR",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"email\":[\"The email must be a valid email address.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: UNKNOWN_EXCEPTION",
+          "content": "\n{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\"Error Processing Request in /Api/v1/UsersController.php in Line :296\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "groupTitle": "Auth"
+  },
+  {
+    "type": "post",
+    "url": "/auth/login",
+    "title": "Login",
+    "name": "UserLogin",
+    "description": "<p>this field shown just for student artwork_default_display_status</p>",
+    "group": "Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Mandatory Email.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Mandatory Password.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"artwork_default_display_status\":1,\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>User not found.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>validation error.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "String",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"INCORRECT_EMAIL_OR_PASSWORD\",\"message\":\"\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"password\":[\"The password field is required.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Applications\\/MAMP\\/htdocs\\/tapdrive\\/api\\/app\\/Http\\/Controllers\\/Api\\/v1\\/UsersController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "groupTitle": "Auth"
+  },
+  {
+    "type": "delete",
+    "url": "/comments/{id}",
+    "title": "Delete Comment",
+    "name": "Delete_Comment",
+    "group": "Comments",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[],\"message\":\"Item deleted successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
+    "type": "post",
+    "url": "/comments",
+    "title": "Store Comment",
+    "name": "Store_Comment",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "artwork_id",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "comment",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"36\",\"artwork\":20,\"user\":946,\"comment\":\"comment test\"},\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"artwork_id\":[\"The selected artwork id is invalid.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
+    "type": "put",
+    "url": "/comments",
+    "title": "Update Comment",
+    "name": "Update_Comment",
+    "group": "Comments",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "comment",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"36\",\"artwork\":20,\"user\":946,\"comment\":\"comment test update\"},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": "<p>validation failed</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/CommentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "groupTitle": "Comments"
+  },
+  {
+    "type": "get",
+    "url": "/countries",
+    "title": "Countries List",
+    "name": "Countries_List",
+    "group": "Countries",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[{\"id\":\"1\",\"name\":\"Afghanistan\",\"code\":\"93\"},{\"id\":\"2\",\"name\":\"Algeria \",\"code\":\"213\"},{\"id\":\"3\",\"name\":\"Andorra \",\"code\":\"376\"},{\"id\":\"4\",\"name\":\"Angola \",\"code\":\"244\"},{\"id\":\"8\",\"name\":\"Argentina \",\"code\":\"54\"},{\"id\":\"9\",\"name\":\"Armenia \",\"code\":\"374\"},{\"id\":\"12\",\"name\":\"Australia \",\"code\":\"61\"},{\"id\":\"13\",\"name\":\"Austria \",\"code\":\"43\"},{\"id\":\"14\",\"name\":\"Azerbaidjan \",\"code\":\"994\"},{\"id\":\"16\",\"name\":\"Bahamas \",\"code\":\"1-242\"},{\"id\":\"17\",\"name\":\"Bahrain \",\"code\":\"973\"},{\"id\":\"18\",\"name\":\"Bangladesh\",\"code\":\"880\"},{\"id\":\"20\",\"name\":\"Belarus \",\"code\":\"375\"},{\"id\":\"21\",\"name\":\"Belgium \",\"code\":\"32\"},{\"id\":\"25\",\"name\":\"Bhutan \",\"code\":\"975\"},{\"id\":\"26\",\"name\":\"Bolivia \",\"code\":\"591\"},{\"id\":\"29\",\"name\":\"Brazil \",\"code\":\"55\"},{\"id\":\"33\",\"name\":\"Bulgaria \",\"code\":\"359\"},{\"id\":\"37\",\"name\":\"Cameroon \",\"code\":\"237\"},{\"id\":\"38\",\"name\":\"Canada \",\"code\":\"1\"},{\"id\":\"43\",\"name\":\"Chile \",\"code\":\"56\"},{\"id\":\"44\",\"name\":\"China \",\"code\":\"86\"},{\"id\":\"48\",\"name\":\"Colombia \",\"code\":\"57\"},{\"id\":\"53\",\"name\":\"Costarica \",\"code\":\"506\"},{\"id\":\"55\",\"name\":\"Croatia \",\"code\":\"385\"},{\"id\":\"56\",\"name\":\"Cuba \",\"code\":\"53\"},{\"id\":\"57\",\"name\":\"Cyprus \",\"code\":\"357\"},{\"id\":\"58\",\"name\":\"Czech Republic\",\"code\":\"420\"},{\"id\":\"60\",\"name\":\"Denmark \",\"code\":\"45\"},{\"id\":\"65\",\"name\":\"Ecuador \",\"code\":\"00593\"},{\"id\":\"66\",\"name\":\"Egypt \",\"code\":\"0020\"},{\"id\":\"73\",\"name\":\"Finland\",\"code\":\"00358\"},{\"id\":\"74\",\"name\":\"France\",\"code\":\"0033\"},{\"id\":\"77\",\"name\":\"Gabon \",\"code\":\"00241\"},{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},{\"id\":\"80\",\"name\":\"Ghana \",\"code\":\"00233\"},{\"id\":\"82\",\"name\":\"Greece \",\"code\":\"0030\"},{\"id\":\"89\",\"name\":\"Hawaii \",\"code\":\"001\"},{\"id\":\"92\",\"name\":\"Hungary \",\"code\":\"0036\"},{\"id\":\"94\",\"name\":\"India\",\"code\":\"0091\"},{\"id\":\"95\",\"name\":\"Indonesia \",\"code\":\"0062\"},{\"id\":\"97\",\"name\":\"Iran \",\"code\":\"0098\"},{\"id\":\"98\",\"name\":\"Iraq \",\"code\":\"00964\"},{\"id\":\"99\",\"name\":\"Ireland \",\"code\":\"00353\"},{\"id\":\"100\",\"name\":\"Israel \",\"code\":\"00972\"},{\"id\":\"101\",\"name\":\"Italy \",\"code\":\"0039\"},{\"id\":\"103\",\"name\":\"Jamaica \",\"code\":\"001 809\"},{\"id\":\"104\",\"name\":\"Japan \",\"code\":\"0081\"},{\"id\":\"105\",\"name\":\"Jordan \",\"code\":\"00962\"},{\"id\":\"107\",\"name\":\"Kenya \",\"code\":\"00254\"},{\"id\":\"110\",\"name\":\"Kuwait \",\"code\":\"00965\"},{\"id\":\"114\",\"name\":\"Lebanon \",\"code\":\"00961\"},{\"id\":\"117\",\"name\":\"Libya \",\"code\":\"00218\"},{\"id\":\"126\",\"name\":\"Malaysia \",\"code\":\"0060\"},{\"id\":\"128\",\"name\":\"Mali \",\"code\":\"00223\"},{\"id\":\"133\",\"name\":\"Mauritius \",\"code\":\"00230\"},{\"id\":\"134\",\"name\":\"Mexico \",\"code\":\"0052\"},{\"id\":\"137\",\"name\":\"Monaco \",\"code\":\"00377\"},{\"id\":\"141\",\"name\":\"Myanmar \",\"code\":\"0095\"},{\"id\":\"144\",\"name\":\"Nepal \",\"code\":\"00977\"},{\"id\":\"145\",\"name\":\"Netherlands \",\"code\":\"0031\"},{\"id\":\"149\",\"name\":\"New Zealand \",\"code\":\"0064\"},{\"id\":\"153\",\"name\":\"Nigeria \",\"code\":\"00234\"},{\"id\":\"156\",\"name\":\"Norway \",\"code\":\"0047\"},{\"id\":\"158\",\"name\":\"Pakistan \",\"code\":\"0092\"},{\"id\":\"160\",\"name\":\"Panama \",\"code\":\"00507\"},{\"id\":\"162\",\"name\":\"Paraguay \",\"code\":\"00595\"},{\"id\":\"163\",\"name\":\"Peru \",\"code\":\"0051\"},{\"id\":\"164\",\"name\":\"Philippines \",\"code\":\"0063\"},{\"id\":\"165\",\"name\":\"Poland \",\"code\":\"0048\"},{\"id\":\"166\",\"name\":\"Portugal \",\"code\":\"00351\"},{\"id\":\"168\",\"name\":\"Qatar\",\"code\":\"00974\"},{\"id\":\"171\",\"name\":\"Russia\",\"code\":\"007\"},{\"id\":\"177\",\"name\":\"Saudi Arabia \",\"code\":\"00966\"},{\"id\":\"181\",\"name\":\"Singapore \",\"code\":\"0065\"},{\"id\":\"185\",\"name\":\"South Africa \",\"code\":\"0027\"},{\"id\":\"188\",\"name\":\"Spain \",\"code\":\"0034\"},{\"id\":\"190\",\"name\":\"Sri Lanka \",\"code\":\"0094\"},{\"id\":\"198\",\"name\":\"Sweden \",\"code\":\"0046\"},{\"id\":\"199\",\"name\":\"Switzerland \",\"code\":\"0041\"},{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},{\"id\":\"201\",\"name\":\"Taiwan \",\"code\":\"00886\"},{\"id\":\"204\",\"name\":\"Thailand \",\"code\":\"0066\"},{\"id\":\"209\",\"name\":\"Turkey \",\"code\":\"0090\"},{\"id\":\"214\",\"name\":\"Ukraine\",\"code\":\"00380\"},{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},{\"id\":\"216\",\"name\":\"United Kingdom \",\"code\":\"0044\"},{\"id\":\"217\",\"name\":\"Uruguay \",\"code\":\"00598\"},{\"id\":\"218\",\"name\":\"USA \",\"code\":\"001\"},{\"id\":\"221\",\"name\":\"Vatican City \",\"code\":\"0039-6\"},{\"id\":\"222\",\"name\":\"Venezuela \",\"code\":\"0058\"},{\"id\":\"223\",\"name\":\"Vietnam \",\"code\":\"0084\"},{\"id\":\"229\",\"name\":\"Yemen\",\"code\":\"00967\"},{\"id\":\"234\",\"name\":\"Zimbabwe \",\"code\":\"00263\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/CountriesController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CountriesController.php",
+    "groupTitle": "Countries"
+  },
+  {
+    "type": "get",
+    "url": "/curriculums",
+    "title": "Curriculums List",
+    "name": "Curriculums_List",
+    "group": "Curriculums",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[{\"id\":\"1\",\"title\":\"US\"},{\"id\":\"2\",\"title\":\"UK\"},{\"id\":\"3\",\"title\":\"INDIAN\"},{\"id\":\"4\",\"title\":\"MOE\"},{\"id\":\"5\",\"title\":\"IB\"},{\"id\":\"6\",\"title\":\"FRENCH\"},{\"id\":\"7\",\"title\":\"GERMANY\"},{\"id\":\"8\",\"title\":\"IRANIAN\"},{\"id\":\"9\",\"title\":\"JAPANESE\"},{\"id\":\"10\",\"title\":\"PHILIPPINE\"},{\"id\":\"11\",\"title\":\"RUSSIAN\"},{\"id\":\"12\",\"title\":\"PAKISTANI\"},{\"id\":\"13\",\"title\":\"SABIS\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/CurriculumsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CurriculumsController.php",
+    "groupTitle": "Curriculums"
+  },
+  {
+    "type": "post",
+    "url": "/Likes",
+    "title": "Toggel Like",
+    "name": "Toggel_Like__if_not_like_store_else_delete_like_",
+    "group": "Likes",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":\"\",\"message\":\"Item created successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": "<p>validation failed</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/LikesController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
+    "groupTitle": "Likes"
+  },
+  {
+    "type": "get",
+    "url": "/profile/artworks",
+    "title": "Artworks List",
+    "name": "Artworks_List",
+    "description": "<p>access by student</p>",
+    "group": "Profile",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: Without access token",
+          "content": "{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":\"\"},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":\"\"},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":\"\"},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":\"\"}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        },
+        {
+          "title": "Success-Response: With access token",
+          "content": "\n{\"data\":[{\"id\":\"18\",\"title\":\"Ipad\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-03-17\",\"keywords\":\"Toys\",\"studentAge\":4,\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"921\",\"email\":\"shoshaho@hotmail.com\",\"first_name\":\"shoshaho\",\"last_name\":\"shoshaho\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"},\"school\":{\"id\":\"909\",\"email\":\"mhd.oubaid@gmail.com\",\"name\":\"Oubaid\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"25\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"\",\"studentAge\":\"\",\"subject\":\"\",\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"26\",\"title\":\"Map\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"UAE, Map\",\"studentAge\":5,\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}},{\"id\":\"27\",\"title\":\"Map2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-04-07\",\"keywords\":\"Map\",\"studentAge\":\"\",\"subject\":{\"id\":\"47\",\"name\":\"History\"},\"student\":{\"id\":\"943\",\"email\":\"gabreal78@gmail.com\",\"first_name\":\"Student1\",\"last_name\":\"Last1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"79\",\"name\":\"Germany\",\"code\":\"0049\"},\"school\":{\"id\":\"937\",\"email\":\"shoshaho@gmail.com\",\"name\":\"School1\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"215\",\"name\":\"United Arab Emirates\",\"code\":\"00971\"}}}}],\"paginator\":{\"total_count\":4,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "groupTitle": "Profile"
+  },
+  {
+    "type": "put",
+    "url": "/profile",
+    "title": "Update artwork default dispaly status",
+    "name": "Update_artwork_default_dispaly_status",
+    "description": "<p>Update artwork default dispaly status access by student</p>",
+    "group": "Profile",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "display",
+            "description": "<p>(0 privat ,1 public)</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"artwork_default_display_status\":1,\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "MODEL_NOT_FOUND",
+            "description": "<p>MODEL NOT FOUND.</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ProfileController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "groupTitle": "Profile"
+  },
+  {
+    "type": "get",
+    "url": "/schools",
+    "title": "School List",
+    "name": "Schools_List",
+    "description": "<p>School List</p>",
+    "group": "Schools",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://www.art2artgallery.com/public/img/default/default.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/SchoolsController.php",
+    "groupTitle": "Schools"
+  },
+  {
+    "type": "get",
+    "url": "/students/{id}/artworks",
+    "title": "Student Artworks List",
+    "name": "Student_Artworks_List",
+    "description": "<p>Student Artworks -access by  teacher role-</p>",
+    "group": "Students",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"29\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a52b85b12.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a52b85b12.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a52b85b12.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a52b85b12.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a52b85b12.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a52b85b12.jpg\",\"createdAt\":\"2017-09-08\",\"uploadedAt\":\"2017-09-08\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tag22,tag33\",\"studentAge\":\"\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"30\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg\",\"createdAt\":\"2017-09-08\",\"uploadedAt\":\"2017-09-08\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"31\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg\",\"image_500\":\"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg\",\"image_300\":\"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg\",\"image_160\":\"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg\",\"image_60\":\"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg\",\"croppedImage\":\"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg\",\"createdAt\":\"2017-09-13\",\"uploadedAt\":\"2017-09-13\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"32\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg\",\"image_500\":\"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg\",\"image_300\":\"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg\",\"image_160\":\"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg\",\"image_60\":\"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg\",\"croppedImage\":\"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg\",\"createdAt\":\"2017-09-13\",\"uploadedAt\":\"2017-09-13\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}],\"paginator\":{\"total_count\":5,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
+    "url": "/students/artworks",
+    "title": "Students Artworks List",
+    "name": "Students_Artworks_List_for_teacher",
+    "description": "<p>Students Artworks -access by teacher role-</p>",
+    "group": "Students",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response: ",
+          "content": "\n{\"data\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"29\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a52b85b12.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a52b85b12.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a52b85b12.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a52b85b12.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a52b85b12.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a52b85b12.jpg\",\"createdAt\":\"2017-09-08\",\"uploadedAt\":\"2017-09-08\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tag22,tag33\",\"studentAge\":\"\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"30\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg\",\"createdAt\":\"2017-09-08\",\"uploadedAt\":\"2017-09-08\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"31\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg\",\"image_500\":\"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg\",\"image_300\":\"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg\",\"image_160\":\"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg\",\"image_60\":\"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg\",\"croppedImage\":\"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg\",\"createdAt\":\"2017-09-13\",\"uploadedAt\":\"2017-09-13\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}},{\"id\":\"32\",\"title\":\"new\",\"comment_1\":\"just comment\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg\",\"image_500\":\"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg\",\"image_300\":\"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg\",\"image_160\":\"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg\",\"image_60\":\"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg\",\"croppedImage\":\"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg\",\"createdAt\":\"2017-09-13\",\"uploadedAt\":\"2017-09-13\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag22,tag33\",\"studentAge\":17,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}],\"paginator\":{\"total_count\":5,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
+    "url": "/teachers/{id}/students",
+    "title": "Students List for specific teacher",
+    "name": "Students_List_for_specific_teacher_access_by_school_",
+    "description": "<p>Students List for specific teacher(access by  school role)</p>",
+    "group": "Students",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "age",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"keywords\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}]}],\"paginator\":{\"total_count\":1,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
+    "url": "/students",
+    "title": "Students List",
+    "name": "Students_List_for_teacher_as_my_studets__access_by_teacher_",
+    "description": "<p>Students List for teacher as my studets -access by  teacher role-</p>",
+    "group": "Students",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"keywords\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}]}],\"paginator\":{\"total_count\":1,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "groupTitle": "Students"
+  },
+  {
+    "type": "get",
+    "url": "/subjects",
+    "title": "Subjects List",
+    "name": "Subjects_List",
+    "group": "Subjects",
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":[{\"id\":\"36\",\"name\":\"Arabic Language\"},{\"id\":\"37\",\"name\":\"Art and Design\"},{\"id\":\"38\",\"name\":\"Citizenship\"},{\"id\":\"39\",\"name\":\"Design\"},{\"id\":\"40\",\"name\":\"Drama\"},{\"id\":\"41\",\"name\":\"English\"},{\"id\":\"42\",\"name\":\"ESL\"},{\"id\":\"43\",\"name\":\"French\"},{\"id\":\"44\",\"name\":\"Geography\"},{\"id\":\"45\",\"name\":\"German\"},{\"id\":\"46\",\"name\":\"Health\"},{\"id\":\"47\",\"name\":\"History\"},{\"id\":\"48\",\"name\":\"Humanities\"},{\"id\":\"49\",\"name\":\"Islamic Studies\"},{\"id\":\"50\",\"name\":\"IT\"},{\"id\":\"51\",\"name\":\"Language Arts\"},{\"id\":\"52\",\"name\":\"Mathematics\"},{\"id\":\"53\",\"name\":\"Music\"},{\"id\":\"54\",\"name\":\"Physical Education\"},{\"id\":\"55\",\"name\":\"Science\"},{\"id\":\"56\",\"name\":\"Social Sciences\"},{\"id\":\"57\",\"name\":\"Spanish\"},{\"id\":\"58\",\"name\":\"Speech and Debate\"},{\"id\":\"59\",\"name\":\"Unit of Inquiry\"},{\"id\":\"60\",\"name\":\"Cultural Studies\"}]}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": "<p>Unknown Exception.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/SubjectsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/SubjectsController.php",
+    "groupTitle": "Subjects"
+  }
+] });

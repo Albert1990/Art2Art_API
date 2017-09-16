@@ -25,13 +25,7 @@ class ArtworksController extends ApiController
     //     'departureAirport' => 'departure'
     // ];
 
-    private $clauseProperties = [
-        'keyword',
-        'age',
-        'school',
-        'curriculum',
-        'country'
-    ];
+
 
     /**
      * @api {get} /artworks Artworks List
@@ -58,27 +52,67 @@ class ArtworksController extends ApiController
      */
     public function index()
     {
+        $clauseProperties = [
+            'keyword',
+            'age',
+            'school',
+            'curriculum',
+            'country'
+        ];
         $parameters = request()->input();
         // $withKeys = $this->getWithKeys($parameters);
-        $whereClauses = $this->getWhereClause($parameters);
+        $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
 
         try {
-            $limit = Helpers::getPaginationLimit(Input::get('limit') );
+            $limit = Input::get('limit');
 
-            $artworks = Artwork::where(function($q) use ($whereClauses){
-                        foreach($whereClauses['like_type'] as $key => $value){
-                            $q->orWhere($key, 'LIKE', $value);
-                        }
-                        foreach($whereClauses['in_type'] as $key => $value){
-                            if(empty($value)){
-                                $value=['-1'];
-                            }
-                            $q->whereIn($key,$value);
-                        }
-                        foreach($whereClauses['normal_type'] as $key => $value){
-                            $q->where($key,$value);
-                        }
-                    })->paginate($limit);
+            $artworks = Artwork::get_all_with_filter($whereClauses,$limit);
+
+            return $this->respondWithPagination($artworks, [
+                'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
+            ]);
+        } catch (Exception $ex) {
+            return $this->respondUnknownException($ex);
+        }
+    }
+
+/**
+     * @api {get} /students/artworks  Students Artworks List
+     * @apiName Students Artworks List for teacher
+     * @apiDescription Students Artworks -access by teacher role-
+     * @apiGroup Students
+     *
+     * @apiParam {Number} age Optional (query parameter).
+     * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} country Optional (query parameter).
+     *
+     * @apiSuccessExample {json} Success-Response: 
+     * 
+     *{"data":[{"id":"28","title":"new","comment_1":"ssssss","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg","createdAt":"2017-07-29","uploadedAt":"2017-07-29","status":"1","displayStatus":"1","tags":"Eid,Festival","studentAge":3,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"29","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a52b85b12.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a52b85b12.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a52b85b12.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a52b85b12.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a52b85b12.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a52b85b12.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","status":"1","displayStatus":"0","tags":"tag22,tag33","studentAge":"","subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"30","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"31","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"32","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}}],"paginator":{"total_count":5,"total_pages":1,"current_page":1,"limit":10}}
+     * @apiError {json} UNKNOWN_EXCEPTION Unknown Exception.
+     *
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in \/Api\/v1\/ArtworksController.php in Line :127","details":[]}}
+     */
+    public function artworks_by_teacher_students()
+    {
+        $clauseProperties = [
+            'keyword',
+            'age',
+            'country'
+        ];
+
+        $teacher= Auth::User();
+        $parameters = request()->input();
+        // $withKeys = $this->getWithKeys($parameters);
+        $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
+        $whereClauses['normal_type']['art_teacher_id']= $teacher->user_id;
+        unset($whereClauses['normal_type']['art_display_status']);
+        unset($whereClauses['normal_type']['art_status']);
+        try {
+            $limit = Input::get('limit');
+
+            $artworks = Artwork::get_all_with_filter($whereClauses,$limit);
 
             return $this->respondWithPagination($artworks, [
                 'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
@@ -95,37 +129,34 @@ class ArtworksController extends ApiController
      * @apiDescription Student Artworks -access by  teacher role-
      * @apiGroup Students
      *
+     * @apiParam {String} keyword Optional (query parameter).
+     *
      * @apiSuccessExample {json} Success-Response: 
      * 
-     *{"data":[{"id":"28","title":"new","comment_1":"ssssss","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg","createdAt":"2017-07-29","uploadedAt":"2017-07-29","tags":"Eid,Festival","studentAge":3,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"30","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"31","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"32","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}}],"paginator":{"total_count":4,"total_pages":1,"current_page":1,"limit":10}}
+     *{"data":[{"id":"28","title":"new","comment_1":"ssssss","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg","createdAt":"2017-07-29","uploadedAt":"2017-07-29","status":"1","displayStatus":"1","tags":"Eid,Festival","studentAge":3,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"29","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a52b85b12.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a52b85b12.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a52b85b12.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a52b85b12.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a52b85b12.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a52b85b12.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","status":"1","displayStatus":"0","tags":"tag22,tag33","studentAge":"","subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"30","title":"new","comment_1":"just comment","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/_file59b2a6eb23e27.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/_file59b2a6eb23e27.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/_file59b2a6eb23e27.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/_file59b2a6eb23e27.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/_file59b2a6eb23e27.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/_file59b2a6eb23e27.jpg","createdAt":"2017-09-08","uploadedAt":"2017-09-08","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"31","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b94fe3a741f.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b94fe3a741f.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b94fe3a741f.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b94fe3a741f.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b94fe3a741f.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b94fe3a741f.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},{"id":"32","title":"new","comment_1":"just comment","comment_2":"","image":"http://localhost:8888/images/uploads/arts/1000/_file59b9502629301.jpg","image_500":"http://localhost:8888/images/uploads/arts/500/_file59b9502629301.jpg","image_300":"http://localhost:8888/images/uploads/arts/300/_file59b9502629301.jpg","image_160":"http://localhost:8888/images/uploads/arts/160/_file59b9502629301.jpg","image_60":"http://localhost:8888/images/uploads/arts/60/_file59b9502629301.jpg","croppedImage":"http://localhost:8888/images/uploads/arts/cropped/_file59b9502629301.jpg","createdAt":"2017-09-13","uploadedAt":"2017-09-13","status":"1","displayStatus":"1","tags":"tag22,tag33","studentAge":17,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}}],"paginator":{"total_count":5,"total_pages":1,"current_page":1,"limit":10}}
      * @apiError {json} UNKNOWN_EXCEPTION Unknown Exception.
      *
      * @apiErrorExample {json} Error-Response:
      * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in \/Api\/v1\/ArtworksController.php in Line :127","details":[]}}
      */
-    public function artworks_by_student($student_id)
+    public function artworks_by_teacher_student($student_id)
     {
+        $clauseProperties = [
+            'keyword'
+        ];
+
+        $teacher= Auth::User();
         $parameters = request()->input();
         // $withKeys = $this->getWithKeys($parameters);
-        $whereClauses = $this->getWhereClause($parameters);
+        $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
         $whereClauses['normal_type']['art_student_id']= $student_id;
+        $whereClauses['normal_type']['art_teacher_id']= $teacher->user_id;
+        unset($whereClauses['normal_type']['art_display_status']);
+        unset($whereClauses['normal_type']['art_status']);
         try {
-            $limit = Helpers::getPaginationLimit(Input::get('limit') );
+            $limit = Input::get('limit');
 
-            $artworks = Artwork::where(function($q) use ($whereClauses){
-                        foreach($whereClauses['like_type'] as $key => $value){
-                            $q->orWhere($key, 'LIKE', $value);
-                        }
-                        foreach($whereClauses['in_type'] as $key => $value){
-                            if(empty($value)){
-                                $value=['-1'];
-                            }
-                            $q->whereIn($key,$value);
-                        }
-                        foreach($whereClauses['normal_type'] as $key => $value){
-                            $q->where($key,$value);
-                        }
-                    })->paginate($limit);
+            $artworks = Artwork::get_all_with_filter($whereClauses,$limit);
 
             return $this->respondWithPagination($artworks, [
                 'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
@@ -366,68 +397,49 @@ class ArtworksController extends ApiController
         }
     }
 
-    //Private Functions
-    private function getWithKeys($parameters) {
-        $withKeys = [];
-
-        if (isset($parameters['include'])) {
-            $includeParms = explode(',', $parameters['include']);
-            $includes = array_intersect($this->supportedIncludes, $includeParms);
-            $withKeys = array_keys($includes);
-        }
-
-        return $withKeys;
-    }
-
-    private function getWhereClause($parameters) {
-        $clause = [];
-        $clause['like_type']=[];
-        $clause['normal_type']=[];
-        $clause['in_type']=[];
-        $users_ids_fillter=false;
-        $users_fillter=false;
-        foreach ($this->clauseProperties as $prop) {
-            if (in_array($prop, array_keys($parameters))) {
-                $users=false;
-                if ($prop =='keyword'){
-                     $clause['like_type']['art_title'] = '%'.$parameters[$prop].'%';
-                     $clause['like_type']['art_keywords'] = '%'.$parameters[$prop].'%';
-                }elseif($prop =='school'){
-                    $users = User::where(['user_school_id' => $parameters[$prop],'user_type'=>'student'])->get();
-                    $users_fillter=true;
-                }elseif($prop =='curriculum'){
-                    $users = User::where(['user_curriculum' => $parameters[$prop],'user_type'=>'student'])->get();
-                    $users_fillter=true;
-                }elseif($prop == 'country'){
-                    $users = User::where(['user_country' => $parameters[$prop],'user_type'=>'student'])->get();
-                    $users_fillter=true;
-                }elseif($prop =='age'){
-                   $clause['normal_type']['art_student_age'] = $parameters[$prop];
-                }
-
-               if($users){
-                    $users_ids=[];
-                    foreach ($users as $key => $user) {
-                       $users_ids[]=$user->user_id;
-                    }
-                    if(!$users_ids_fillter){
-                        $users_ids_fillter = $users_ids;
-                    }else{
-                        $users_ids_fillter = array_intersect($users_ids,$users_ids_fillter);
-                    }
-                }
-
+/**
+     * @api {put} /artworks/{id} Update Artwork Display Status
+     * @apiName Update Artwork Display(by student)
+     * @apiDescription Update Artwork Display Status (access by student)
+     * @apiGroup Artworks
+     *
+     * @apiParam {Boolean} dispaly (0 privat ,1 public)
+     *
+     *@apiSuccessExample {json} Success-Response: 
+     * 
+     * {"data":{"id":"28","title":"new","comment_1":"ssssss","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/jh454erg75fdg8rg.jpg","image_500":"http://www.art2artgallery.com/public/resources/art_images/500/jh454erg75fdg8rg.jpg","image_300":"http://www.art2artgallery.com/public/resources/art_images/300/jh454erg75fdg8rg.jpg","image_160":"http://www.art2artgallery.com/public/resources/art_images/160/jh454erg75fdg8rg.jpg","image_60":"http://www.art2artgallery.com/public/resources/art_images/60/jh454erg75fdg8rg.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/jh454erg75fdg8rg.jpg","createdAt":"2017-07-29","uploadedAt":"2017-07-29","status":"1","displayStatus":"","tags":"Eid,Festival","studentAge":3,"subject":{"id":"36","name":"Arabic Language"},"student":{"id":"946","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"}}},"message":"Item updated successfully"}
+     *
+     * @apiError {json} MODEL_NOT_FOUND MODEL NOT FOUND.
+     *
+     *
+     * @apiError {json} UNKNOWN_EXCEPTION Unknown Exception.
+     *
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in Api\/v1\/ArtworksController.php in Line :127","details":[]}}
+     */
+    public function update_by_student(Request $request, $id)
+    {
+        $artwork = Artwork::find($id);
+        try {
+            if(!$artwork)
+            {
+                return $this->respondNotFound('Artwork does not exist.');
             }
-        }
-        if($users_fillter){
-            $clause['in_type']['art_student_id'] = $users_ids_fillter;
-        }
-         // var_dump($clause['in_type']);die('ss');
 
-        $clause['normal_type']['art_display_status'] =1;
-        $clause['normal_type']['art_status'] = 1;
+            $user=Auth::User();
+            if($artwork->art_student_id != $user->user_id)
+                return $this->respondUnauthorized('You must have privilege to access this resource');
 
-        return $clause;
+
+            if( in_array('display', array_keys($request->all()))){
+                $artwork->art_display_status = $request->input('display','');
+                $artwork->save();
+            }
+
+            return $this->respondUpdated(Helpers::transformObject($artwork,new ArtworkTransformer()));
+
+        } catch (Exception $ex) {
+            return $this->respondUnknownException($ex);
+        }
     }
-
 }

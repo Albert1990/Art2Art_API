@@ -1,1 +1,16 @@
-define({  "name": "Basic Api Doc",  "version": "0.1.0",  "description": "documentation for a basic api mobile app provided by Brain Socket",  "title": "Basic Api Doc",  "url": "http://104.217.253.15:3008/api/v1",  "sampleUrl": false,  "apidoc": "0.2.0",  "generator": {    "name": "apidoc",    "time": "2017-06-24T16:04:30.900Z",    "url": "http://apidocjs.com",    "version": "0.16.1"  }});
+define({
+  "name": "Art2Art Api Doc",
+  "version": "0.1.0",
+  "description": "documentation for a Art2Art api mobile app provided by Brain Socket",
+  "title": "Art2Art Api Doc",
+  "url": "http://localhost:8888/api/v1",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "apidoc": "0.3.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2017-09-16T18:51:10.383Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.6"
+  }
+});

@@ -68,7 +68,8 @@ Route::group(['prefix'=>'api/v1'],function(){
 
         //Students
         Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index'); 
-        Route::get('students/{id}/artworks','\App\Http\Controllers\Api\v1\ArtworksController@artworks_by_student'); 
+        Route::get('students/artworks','\App\Http\Controllers\Api\v1\ArtworksController@artworks_by_teacher_students');
+        Route::get('students/{id}/artworks','\App\Http\Controllers\Api\v1\ArtworksController@artworks_by_teacher_student');
 
         //Artworks
         Route::post('artworks', '\App\Http\Controllers\Api\v1\ArtworksController@store');
@@ -89,6 +90,8 @@ Route::group(['prefix'=>'api/v1'],function(){
         //profile
         Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
         Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
+        //artworks
+        Route::put('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@update_by_student');
     });
     
 
