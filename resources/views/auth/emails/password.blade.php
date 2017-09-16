@@ -5,9 +5,8 @@
 			</td>
 		</tr><tr><td>
 			<div style="background:#ffffff;padding:10px;">
-			<p><strong>Dear test test</strong></p>
 
-			<p>We have receieved your request for rest password in Art2ArtGallery.com. Please use the token value below and use it to complete your rest password process.</p>
+			<p>We have receieved your request for rest password in Art2ArtGallery.com. Please use the token value below to complete your rest password process.</p>
 
 			<p>Thank you.</p>
 
