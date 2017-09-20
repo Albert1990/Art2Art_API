@@ -7,6 +7,7 @@ use App\Library\Transformers\ArtworkTransformer;
 use App\Models\Artwork;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Requests\CreateArtworkRequest;
 use App\Http\Controllers\Controller;
@@ -191,10 +192,21 @@ class ArtworksController extends ApiController
      *
      * @apiErrorExample {json} Error-Response:
      * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in Api\/v1\/ArtworksController.php in Line :127","details":[]}}
+     *
+     * @apiErrorExample {json} Error-Response:
+     *{"error":{"code":"UNAUTHORIZED","message":"you are not teacher for student has id=946","details":[]}}
      */
     public function store(CreateArtworkRequest $request)
     {
         try{
+
+            $user=Auth::User();
+            $student = User::find($request->input('studentId',''));
+
+            $is_teacher_of_student =DB::table('user_students')->where(['us_teacher_id'=>$user->user_id,'us_student_id' => $student->user_id])->get();
+            if(!$is_teacher_of_student){
+                return $this->respondUnauthorized('you are not teacher for student has id='.$student->user_id);
+            }
 
             $file = $request->file('image');
             if($file){
@@ -215,9 +227,6 @@ class ArtworksController extends ApiController
 
             }
 
-            $user=Auth::User();
-
-            $student = User::find($request->input('studentId',''));
             $artwork_attributes = [
                 'art_title' => $request->input('title',''),
                 // 'art_display_status' => $request->input('display',''),
@@ -334,8 +343,6 @@ class ArtworksController extends ApiController
                 Helpers::createThumb($file_path_default,$filename,$file_path_default.'/1000/',1000,1000);
 
             }
-
-            $user=Auth::User();
 
             if($request->input('title','')){
                  $artwork->art_title = $request->input('title','');

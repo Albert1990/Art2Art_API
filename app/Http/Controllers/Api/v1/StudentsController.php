@@ -8,6 +8,7 @@ use App\Library\Transformers\ArtworkTransformer;
 use App\Models\User;
 use App\Models\Artwork;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -46,7 +47,19 @@ class StudentsController extends ApiController
         $user=Auth::User();
         try{
             $limit = Helpers::getPaginationLimit(Input::get('limit') );
-            $students = User::where(['user_teacher_id' => $user->user_id,'user_status' => 1,'user_type'=>'student'])->paginate($limit);
+
+            // $students = User::where(['user_teacher_id' => $user->user_id,'user_status' => 1,'user_type'=>'student'])->paginate($limit);
+            $students =DB::table('user_students')->where('us_teacher_id', $user->user_id)->get();
+            $students_ids=[];
+            foreach ($students as $key => $student) {
+               $students_ids[]=$student->us_student_id;
+            }
+            //var_dump($students_ids);die();
+            $students=User::where(function($q) use ($students_ids){
+                    $q->whereIn('user_id',$students_ids);
+                    $q->where('user_type','student');
+                })->paginate($limit);
+
             return $this->respondWithPagination($students, [
                 'data' => $this->include_artworks(Helpers::transformArray($students->all(), new UserTransformer()))
             ]);
@@ -73,8 +86,6 @@ class StudentsController extends ApiController
      *
      * @apiParam {Number} age Optional (query parameter).
      * @apiParam {String} keyword Optional (query parameter).
-     * @apiParam {Number} school Optional (query parameter).
-     * @apiParam {Number} curriculum Optional (query parameter).
      * @apiParam {Number} country Optional (query parameter).
      *
      * @apiSuccessExample {json} Success-Response:
@@ -85,13 +96,31 @@ class StudentsController extends ApiController
      *
      * @apiErrorExample {json} Error-Response:
      * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in \/Api\/v1\/StudentsController.php in Line :127","details":[]}}
+     *
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"UNAUTHORIZED","message":"you are not school for teacher has id=9329","details":[]}}
      */
     public function students_by_teacher($teacher_id){
-        $parameters = request()->input();
-        $whereClauses = $this->getWhereClause($parameters);
-        $whereClauses['normal_type']['user_teacher_id'] = $teacher_id;
         try {
             $limit = Helpers::getPaginationLimit(Input::get('limit') );
+            $user=Auth::User();
+
+            $is_school_of_teacher =DB::table('user_students')->where(['us_teacher_id'=>$teacher_id,'us_school_id' => $user->user_id])->get();
+            if(!$is_school_of_teacher){
+                return $this->respondUnauthorized('you are not school for teacher has id='.$teacher_id);
+            }
+
+            $parameters = request()->input();
+            $whereClauses = $this->getWhereClause($parameters);
+            //$whereClauses['normal_type']['user_teacher_id'] = $teacher_id;
+            
+            $students =DB::table('user_students')->where(['us_school_id'=> $user->user_id, 'us_teacher_id' => $teacher_id])->get();
+            $students_ids=[];
+            foreach ($students as $key => $student) {
+               $students_ids[]=$student->us_student_id;
+            }
+            $whereClauses['in_type']['user_id'] = $students_ids;
+            //var_dump($students_ids);die();
 
             $students = User::where(function($q) use ($whereClauses){
                         foreach($whereClauses['like_type'] as $key => $value){
