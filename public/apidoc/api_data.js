@@ -274,6 +274,11 @@ define({ "api": [
           "title": "Error-Response:",
           "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in Api\\/v1\\/ArtworksController.php in Line :127\",\"details\":[]}}",
           "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"you are not teacher for student has id=946\",\"details\":[]}}",
+          "type": "json"
         }
       ]
     },
@@ -370,7 +375,7 @@ define({ "api": [
   },
   {
     "type": "put",
-    "url": "/artworks/{id}",
+    "url": "/artworks/{id}/update_display",
     "title": "Update Artwork Display Status",
     "name": "Update_Artwork_Display_by_student_",
     "description": "<p>Update Artwork Display Status (access by student)</p>",
@@ -1359,20 +1364,6 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "school",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "curriculum",
-            "description": "<p>Optional (query parameter).</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
             "field": "country",
             "description": "<p>Optional (query parameter).</p>"
           }
@@ -1404,6 +1395,11 @@ define({ "api": [
         {
           "title": "Error-Response:",
           "content": "{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\" in \\/Api\\/v1\\/StudentsController.php in Line :127\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"UNAUTHORIZED\",\"message\":\"you are not school for teacher has id=9329\",\"details\":[]}}",
           "type": "json"
         }
       ]

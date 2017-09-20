@@ -405,7 +405,7 @@ class ArtworksController extends ApiController
     }
 
 /**
-     * @api {put} /artworks/{id} Update Artwork Display Status
+     * @api {put} /artworks/{id}/update_display Update Artwork Display Status
      * @apiName Update Artwork Display(by student)
      * @apiDescription Update Artwork Display Status (access by student)
      * @apiGroup Artworks

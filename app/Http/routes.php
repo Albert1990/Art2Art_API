@@ -91,7 +91,7 @@ Route::group(['prefix'=>'api/v1'],function(){
         Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
         Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
         //artworks
-        Route::put('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@update_by_student');
+        Route::put('artworks/{id}/update_display', '\App\Http\Controllers\Api\v1\ArtworksController@update_by_student');
     });
     
 
