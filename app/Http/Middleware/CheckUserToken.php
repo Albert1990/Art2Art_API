@@ -22,8 +22,11 @@ class CheckUserToken extends BaseMiddleware
     public function handle($request, Closure $next, $optional = false)
     {
         try {
-            $token=$request->header('token',false);
-            if(!$token) $token = $request->input('token',false);
+            // $token=$request->header('token',false);
+            // if(!$token) $token = $request->input('token',false);
+
+            $token = JWTAuth::getToken();
+            
             $user = false;
 
             if(!$token && !$optional)
