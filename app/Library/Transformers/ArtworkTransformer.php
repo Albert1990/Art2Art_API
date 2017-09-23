@@ -21,10 +21,7 @@ class ArtworkTransformer extends BaseTransformerAbstract {
     protected $defaultIncludes = [
 
     ];  
-
-    const CROPPED_IMAGES_PATH = "http://www.art2artgallery.com/public/resources/art_images/cropped/";
-
-    const IMAGES_PATH = "http://www.art2artgallery.com/public/resources/art_images/1000/";
+    const IMAGES_PATH = 'images/uploads/arts/';
 
     public function transform(Artwork $item){
         $user = Auth::user();

@@ -18,9 +18,7 @@ use App\Library\Transformers\ArtworkTransformer;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends BaseTransformerAbstract{
-    // const IMAGES_PATH='http://www.art2artgallery.com/public/resources/profile_images/';
-    // private $default_user_image = 'http://www.art2artgallery.com/public/img/default/default.jpg';
-
+    const IMAGES_PATH = 'images/uploads/users/';
     private $default_user_image = 'default-user.jpg';
 
     private $is_minified = false;

@@ -32,8 +32,10 @@ class ArtworksController extends ApiController
      * @api {get} /artworks Artworks List
      * @apiName Artworks List
      * @apiGroup Artworks
+     * @apiDescription ex:http://localhost:8888/api/v1/artworks?ageMax=6&school=938&country=200&curriculum=0&keyword=Sandras&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTA1OTQwMTQ4LCJleHAiOjE2NjM2MjAxNDgsIm5iZiI6MTUwNTk0MDE0OCwianRpIjoiMkpub00yMHlnVFpiSjlBZCJ9.TkQmjRvnKu6QOxhO2o0qm0RGM6KJQbTA7yGOAWvXG9Q
      *
-     * @apiParam {Number} age Optional (query parameter).
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
      * @apiParam {String} keyword Optional (query parameter).
      * @apiParam {Number} school Optional (query parameter).
      * @apiParam {Number} curriculum Optional (query parameter).
@@ -55,7 +57,8 @@ class ArtworksController extends ApiController
     {
         $clauseProperties = [
             'keyword',
-            'age',
+            'ageMin',
+            'ageMax',
             'school',
             'curriculum',
             'country'
@@ -83,8 +86,11 @@ class ArtworksController extends ApiController
      * @apiDescription Students Artworks -access by teacher role-
      * @apiGroup Students
      *
-     * @apiParam {Number} age Optional (query parameter).
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
      * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} school Optional (query parameter).
+     * @apiParam {Number} curriculum Optional (query parameter).
      * @apiParam {Number} country Optional (query parameter).
      *
      * @apiSuccessExample {json} Success-Response: 
@@ -99,7 +105,10 @@ class ArtworksController extends ApiController
     {
         $clauseProperties = [
             'keyword',
-            'age',
+            'ageMin',
+            'ageMax',
+            'school',
+            'curriculum',
             'country'
         ];
 
@@ -130,7 +139,12 @@ class ArtworksController extends ApiController
      * @apiDescription Student Artworks -access by  teacher role-
      * @apiGroup Students
      *
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
      * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} school Optional (query parameter).
+     * @apiParam {Number} curriculum Optional (query parameter).
+     * @apiParam {Number} country Optional (query parameter).
      *
      * @apiSuccessExample {json} Success-Response: 
      * 
@@ -143,7 +157,12 @@ class ArtworksController extends ApiController
     public function artworks_by_teacher_student($student_id)
     {
         $clauseProperties = [
-            'keyword'
+            'keyword',
+            'ageMin',
+            'ageMax',
+            'school',
+            'curriculum',
+            'country'
         ];
 
         $teacher= Auth::User();
@@ -210,7 +229,7 @@ class ArtworksController extends ApiController
 
             $file = $request->file('image');
             if($file){
-                $file_path_default='images/uploads/arts/';
+                $file_path_default=ArtworkTransformer::IMAGES_PATH;
                 $filename=Helpers::uploadFile($file,$file_path_default);
 
                 copy(public_path($file_path_default.$filename),$file_path_default.'/cropped/'.$filename);
@@ -327,7 +346,7 @@ class ArtworksController extends ApiController
             $file = $request->file('image');
             $filename='';
             if($file){
-                $file_path_default='images/uploads/arts/';
+                $file_path_default=ArtworkTransformer::IMAGES_PATH;
                 $filename=Helpers::uploadFile($file,$file_path_default);
 
                 copy(public_path($file_path_default.$filename),$file_path_default.'/cropped/'.$filename);

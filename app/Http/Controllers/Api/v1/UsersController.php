@@ -212,4 +212,68 @@ class UsersController extends ApiController
             return $this->respondUnknownException($ex);
         }
     }
+
+
+/**
+     * Chanage password
+     *
+     * @api {post} /auth/change_password Change Password
+     * @apiName changePassword
+     * @apiGroup Auth
+     *
+     * @apiParam {string} newPassword New password
+     * @apiParam {string} oldPassword Old password
+     *
+     * @apiSuccessExample {json} Success-Response:
+     * {"data":{"id":"938","type":"school","email":"fatherboard1@gmail.com","name":"Alfarouq","phone":"933074900","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"200","name":"Syria ","code":"00963"},"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2NoYW5nZV9wYXNzd29yZCIsImlhdCI6MTUwNjE3MDA2NywiZXhwIjoxNjYzODUwMDY3LCJuYmYiOjE1MDYxNzAwNjcsImp0aSI6ImR0ZFk1VEl2WURsU1Zjd1oifQ.OcR0o5v40AKWIXbnz8wdW6QIlRz47CrXy3CbHIkfSI4"},"message":"Item updated successfully"}
+     *
+     * @apiError {json} VALIDATION_ERROR 
+     *
+     * @apiError {json} UNKNOWN_EXCEPTION
+     *
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"INCORRECT_PASSWORD","message":"","details":[]}}
+
+     * @apiErrorExample {json} Error-Response:
+     * {"error":{"code":"VALIDATION_ERROR","message":"","details":{"oldPassword":["The old password field is required."]}}}
+     *
+     * @apiErrorExample {json} Error-Response: UNKNOWN_EXCEPTION
+     *
+     *{"error":{"code":"UNKNOWN_EXCEPTION","message":"Error Processing Request in /Api/v1/UsersController.php in Line :296","details":[]}}
+     *
+     */
+    public function change_password(Request $request)
+    {
+        try{
+            $user = Auth::user();
+
+            $validator = Validator::make($request->all(),[
+                    'newPassword' => 'required',
+                    'oldPassword' => 'required'
+                ]);
+
+            if($validator->fails())
+                    return $this->respondValidationFailed($validator->errors());
+
+            $credentials = $request->only(
+                'newPassword', 'oldPassword'
+            );
+
+            if (md5($credentials['oldPassword']) !=  $user->user_password)
+                return $this->respondError(ErrorMessages::INCORRECT_PASSWORD);
+            
+            $user->user_password = md5($credentials['newPassword']);
+            $user->save();
+
+            $transformedUser=Helpers::transformObject($user, new UserTransformer());
+            $transformedUser['token'] = JWTAuth::fromUser($user);
+
+            return $this->respondUpdated($transformedUser);
+        }catch (Exception $ex) {
+            return $this->respondUnknownException($ex);
+        }
+
+    }
+
+
 }

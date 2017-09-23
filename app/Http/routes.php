@@ -48,6 +48,7 @@ Route::group(['prefix'=>'api/v1'],function(){
 
         //users
         Route::put('users', '\App\Http\Controllers\Api\v1\UsersController@update');
+        Route::post('auth/change_password','\App\Http\Controllers\Api\v1\UsersController@change_password');
 
     });
 

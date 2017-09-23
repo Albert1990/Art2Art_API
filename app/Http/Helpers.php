@@ -21,6 +21,9 @@ use Mockery\CountValidator\Exception;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Library\Transformers\UserTransformer;
+use App\Library\Transformers\ArtworkTransformer;
+
 use Intervention\Image\Facades\Image as Image;
 
 class Helpers {
@@ -79,9 +82,8 @@ class Helpers {
 
     public static function getUserImagePath($file)
     {
-        return asset('/public/images/uploads/users/'.$file);
-        if(file_exists(public_path().'/images/uploads/users/'.$file)){
-            return asset('/images/uploads/users/'.$file);
+        if(file_exists(public_path().'/'.UserTransformer::IMAGES_PATH.$file)){
+            return asset(UserTransformer::IMAGES_PATH.$file);
         }else{
            return 'http://www.art2artgallery.com/public/resources/profile_images/'.$file; 
         }
@@ -89,8 +91,8 @@ class Helpers {
 
     public static function getArtworkImagePath($type,$file)
     {
-        if(file_exists(public_path().'/images/uploads/arts/'.$type.$file)){
-            return asset('/images/uploads/arts/'.$type.$file);
+        if(file_exists(public_path().'/'.ArtworkTransformer::IMAGES_PATH.$type.$file)){
+            return asset(ArtworkTransformer::IMAGES_PATH.$type.$file);
         }else{
            return 'http://www.art2artgallery.com/public/resources/art_images/'.$type.$file; 
         }

@@ -7,8 +7,9 @@ use App\Library\Transformers\ArtworkTransformer;
 use App\Library\Transformers\UserTransformer;
 use App\Models\Artwork;
 use App\Models\User;
+use App\Http\Requests\UserUpdateProfileRequest;
 use Illuminate\Http\Request;
-// use App\Http\Requests\CreateCategoryRequest;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -58,12 +59,19 @@ class ProfileController extends ApiController
     }
    
     /**
-     * @api {put} /profile Update artwork default dispaly status
-     * @apiName Update artwork default dispaly status
-     * @apiDescription Update artwork default dispaly status access by student
+     * @api {put} /profile Update Profile
+     * @apiName UpdateProfile
+     * @apiDescription Update Profile access by student
      * @apiGroup Profile
      *
-     * @apiParam {Boolean} display (0 privat ,1 public)
+     * @apiParam {Boolean} artwork_default_display_status (0 privat ,1 public)
+     * @apiParam {String} first_name first name of the User.
+     * @apiParam {String} last_name last name of the User.
+     * @apiParam {String} phone  phone of the User.
+     * @apiParam {String} gender  gender of the User (M | F).
+     * @apiParam {Date} birthday  birthday of the User (UTC format 2017-07-19 21:16:04.000000).
+     * @apiParam {Number} countryId  user country id.
+     * @apiParam {File} [photo]  user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).
      *
      * @apiSuccessExample {json} Success-Response:
      * {"data":{"id":"946","type":"student","email":"student_mail@yopmail.com","first_name":"mhd","last_name":"student","gender":"M","artwork_default_display_status":1,"address":"test","birthday":"2000-10-05","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","isActive":true,"isVerified":true,"country":{"id":"19","name":"Barbados ","code":"1-246"},"school":{"id":"944","email":"shalabi.eng@gmail.com","name":"test school","photo":"http://localhost:8888/public/images/uploads/users/default-user.jpg","country":{"id":"200","name":"Syria ","code":"00963"}}},"message":"Item updated successfully"}
@@ -74,15 +82,32 @@ class ProfileController extends ApiController
      * @apiErrorExample {json} Error-Response:
      * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in Api\/v1\/ProfileController.php in Line :127","details":[]}}
      */
-    public function update(request $request)
+    public function update(UserUpdateProfileRequest $request)
     {
         $student=Auth::User();
         try{
             if($student == null)
                 return $this->respondModelNotFound();
-            $student->user_artwork_default_display_status =$request->input('display','');
+
+            //check if photo uploaded
+            $file = $request->file('photo');
+            $filename='';
+            if($file){
+                Helpers::deleteFile(UserTransformer::IMAGES_PATH . $student->user_image);
+                $student->user_image=Helpers::uploadFile($file,UserTransformer::IMAGES_PATH);
+                $student->user_image_verified=0;
+            }
+            $student->user_artwork_default_display_status =$request->input('artwork_default_display_status','');
+            $student->user_first_name =$request->input('first_name','');
+            $student->user_last_name =$request->input('last_name','');
+            $student->user_gender =$request->input('gender','');
+            $student->user_phonenumber =$request->input('phone','');
+            $student->user_dob =$request->input('birthday','');
+            $student->user_country =$request->input('countryId','');
+            $student->user_full_name= $student->user_first_name.' '.$student->user_last_name;
             $student->save();
-            return $this->respondUpdated(Helpers::transformObject($student,new UserTransformer()));
+
+            return $this->respondUpdated(Helpers::transformObject($student, new UserTransformer()));
         }catch (\Exception $ex){
             return $this->respondUnknownException($ex);
         }

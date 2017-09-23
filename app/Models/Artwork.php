@@ -53,11 +53,12 @@ class Artwork extends BaseModel
         $clause['like_type']=[];
         $clause['normal_type']=[];
         $clause['in_type']=[];
+        $clause['compare_type']=[];
         $users_ids_fillter=false;
         $users_fillter=false;
         foreach ($clauseProperties as $prop) {
             if (in_array($prop, array_keys($parameters))) {
-                $users=false;
+                $users=[];
                 if ($prop =='keyword'){
                      $clause['like_type']['art_title'] = '%'.$parameters[$prop].'%';
                      $clause['like_type']['art_keywords'] = '%'.$parameters[$prop].'%';
@@ -66,15 +67,18 @@ class Artwork extends BaseModel
                     $users_fillter=true;
                 }elseif($prop =='curriculum'){
                     $users = User::where(['user_curriculum' => $parameters[$prop],'user_type'=>'student'])->get();
+                    //die(count($users));
                     $users_fillter=true;
                 }elseif($prop == 'country'){
                     $users = User::where(['user_country' => $parameters[$prop],'user_type'=>'student'])->get();
                     $users_fillter=true;
-                }elseif($prop =='age'){
-                   $clause['normal_type']['art_student_age'] = $parameters[$prop];
+                }elseif($prop =='ageMin'){
+                   $clause['compare_type']['art_student_age'] = ['>=',$parameters[$prop]];
+                }elseif($prop =='ageMax'){
+                   $clause['compare_type']['art_student_age'] = ['<=',$parameters[$prop]];
                 }
 
-               if($users){
+                if($users_fillter && count($users)){
                     $users_ids=[];
                     foreach ($users as $key => $user) {
                        $users_ids[]=$user->user_id;
@@ -84,6 +88,9 @@ class Artwork extends BaseModel
                     }else{
                         $users_ids_fillter = array_intersect($users_ids,$users_ids_fillter);
                     }
+                }elseif($users_fillter &&  !count($users)){
+                    $users_ids_fillter=[];
+                    break;
                 }
 
             }
@@ -91,7 +98,6 @@ class Artwork extends BaseModel
         if($users_fillter){
             $clause['in_type']['art_student_id'] = $users_ids_fillter;
         }
-         // var_dump($clause['in_type']);die('ss');
 
         $clause['normal_type']['art_display_status'] =1;
         $clause['normal_type']['art_status'] = 1;
@@ -115,6 +121,9 @@ class Artwork extends BaseModel
                     foreach($whereClauses['normal_type'] as $key => $value){
                         $q->where($key,$value);
                     }
+                    foreach($whereClauses['compare_type'] as $key => $value){
+                            $q->where($key,$value[0],$value[1]);
+                        }
                 })->paginate($limit);
         return $artworks;
 

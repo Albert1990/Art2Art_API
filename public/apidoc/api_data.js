@@ -5,6 +5,7 @@ define({ "api": [
     "title": "Artworks List",
     "name": "Artworks_List",
     "group": "Artworks",
+    "description": "<p>ex:http://localhost:8888/api/v1/artworks?ageMax=6&amp;school=938&amp;country=200&amp;curriculum=0&amp;keyword=Sandras&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTA1OTQwMTQ4LCJleHAiOjE2NjM2MjAxNDgsIm5iZiI6MTUwNTk0MDE0OCwianRpIjoiMkpub00yMHlnVFpiSjlBZCJ9.TkQmjRvnKu6QOxhO2o0qm0RGM6KJQbTA7yGOAWvXG9Q</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -12,7 +13,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "age",
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
             "description": "<p>Optional (query parameter).</p>"
           },
           {
@@ -81,7 +89,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -127,7 +135,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -184,7 +192,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -283,7 +291,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -370,7 +378,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -430,7 +438,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -469,7 +477,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/CommentsController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -508,7 +516,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
+    "filename": "app/Http/Controllers/Api/v1/LikesController.php",
     "groupTitle": "Artworks"
   },
   {
@@ -589,7 +597,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "filename": "app/Http/Controllers/Api/v1/UsersController.php",
     "groupTitle": "Auth"
   },
   {
@@ -679,7 +687,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "filename": "app/Http/Controllers/Api/v1/UsersController.php",
     "groupTitle": "Auth"
   },
   {
@@ -761,7 +769,83 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/UsersController.php",
+    "filename": "app/Http/Controllers/Api/v1/UsersController.php",
+    "groupTitle": "Auth"
+  },
+  {
+    "type": "post",
+    "url": "/auth/change_password",
+    "title": "Change Password",
+    "name": "changePassword",
+    "group": "Auth",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "newPassword",
+            "description": "<p>New password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "string",
+            "optional": false,
+            "field": "oldPassword",
+            "description": "<p>Old password</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\"data\":{\"id\":\"938\",\"type\":\"school\",\"email\":\"fatherboard1@gmail.com\",\"name\":\"Alfarouq\",\"phone\":\"933074900\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},\"token\":\"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2NoYW5nZV9wYXNzd29yZCIsImlhdCI6MTUwNjE3MDA2NywiZXhwIjoxNjYzODUwMDY3LCJuYmYiOjE1MDYxNzAwNjcsImp0aSI6ImR0ZFk1VEl2WURsU1Zjd1oifQ.OcR0o5v40AKWIXbnz8wdW6QIlRz47CrXy3CbHIkfSI4\"},\"message\":\"Item updated successfully\"}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "VALIDATION_ERROR",
+            "description": ""
+          },
+          {
+            "group": "Error 4xx",
+            "type": "json",
+            "optional": false,
+            "field": "UNKNOWN_EXCEPTION",
+            "description": ""
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"INCORRECT_PASSWORD\",\"message\":\"\",\"details\":[]}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "{\"error\":{\"code\":\"VALIDATION_ERROR\",\"message\":\"\",\"details\":{\"oldPassword\":[\"The old password field is required.\"]}}}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response: UNKNOWN_EXCEPTION",
+          "content": "\n{\"error\":{\"code\":\"UNKNOWN_EXCEPTION\",\"message\":\"Error Processing Request in /Api/v1/UsersController.php in Line :296\",\"details\":[]}}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "app/Http/Controllers/Api/v1/UsersController.php",
     "groupTitle": "Auth"
   },
   {
@@ -807,7 +891,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/CommentsController.php",
     "groupTitle": "Comments"
   },
   {
@@ -878,7 +962,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/CommentsController.php",
     "groupTitle": "Comments"
   },
   {
@@ -944,7 +1028,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CommentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/CommentsController.php",
     "groupTitle": "Comments"
   },
   {
@@ -983,7 +1067,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CountriesController.php",
+    "filename": "app/Http/Controllers/Api/v1/CountriesController.php",
     "groupTitle": "Countries"
   },
   {
@@ -1022,7 +1106,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/CurriculumsController.php",
+    "filename": "app/Http/Controllers/Api/v1/CurriculumsController.php",
     "groupTitle": "Curriculums"
   },
   {
@@ -1068,7 +1152,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/LikesController.php",
+    "filename": "app/Http/Controllers/Api/v1/LikesController.php",
     "groupTitle": "Likes"
   },
   {
@@ -1113,15 +1197,15 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "filename": "app/Http/Controllers/Api/v1/ProfileController.php",
     "groupTitle": "Profile"
   },
   {
     "type": "put",
     "url": "/profile",
-    "title": "Update artwork default dispaly status",
-    "name": "Update_artwork_default_dispaly_status",
-    "description": "<p>Update artwork default dispaly status access by student</p>",
+    "title": "Update Profile",
+    "name": "UpdateProfile",
+    "description": "<p>Update Profile access by student</p>",
     "group": "Profile",
     "parameter": {
       "fields": {
@@ -1130,8 +1214,57 @@ define({ "api": [
             "group": "Parameter",
             "type": "Boolean",
             "optional": false,
-            "field": "display",
+            "field": "artwork_default_display_status",
             "description": "<p>(0 privat ,1 public)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "first_name",
+            "description": "<p>first name of the User.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "last_name",
+            "description": "<p>last name of the User.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phone",
+            "description": "<p>phone of the User.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "gender",
+            "description": "<p>gender of the User (M | F).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Date",
+            "optional": false,
+            "field": "birthday",
+            "description": "<p>birthday of the User (UTC format 2017-07-19 21:16:04.000000).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "countryId",
+            "description": "<p>user country id.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": true,
+            "field": "photo",
+            "description": "<p>user photo (mimetypes:image/png,image/jpeg,image/bmp|max:1000).</p>"
           }
         ]
       }
@@ -1173,7 +1306,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ProfileController.php",
+    "filename": "app/Http/Controllers/Api/v1/ProfileController.php",
     "groupTitle": "Profile"
   },
   {
@@ -1213,7 +1346,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/SchoolsController.php",
+    "filename": "app/Http/Controllers/Api/v1/SchoolsController.php",
     "groupTitle": "Schools"
   },
   {
@@ -1228,9 +1361,44 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
             "description": "<p>Optional (query parameter).</p>"
           }
         ]
@@ -1266,7 +1434,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Students"
   },
   {
@@ -1283,7 +1451,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "age",
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
             "description": "<p>Optional (query parameter).</p>"
           },
           {
@@ -1291,6 +1466,20 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
             "description": "<p>Optional (query parameter).</p>"
           },
           {
@@ -1333,7 +1522,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/ArtworksController.php",
+    "filename": "app/Http/Controllers/Api/v1/ArtworksController.php",
     "groupTitle": "Students"
   },
   {
@@ -1350,7 +1539,14 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "age",
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
             "description": "<p>Optional (query parameter).</p>"
           },
           {
@@ -1358,6 +1554,20 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
             "description": "<p>Optional (query parameter).</p>"
           },
           {
@@ -1374,7 +1584,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"keywords\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}]}],\"paginator\":{\"total_count\":1,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "content": "\n{\"data\":[{\"id\":\"940\",\"type\":\"student\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"artwork_default_display_status\":\"1\",\"address\":\"Damascus\",\"birthday\":\"2010-12-04\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},\"school\":{\"id\":\"938\",\"email\":\"fatherboard1@gmail.com\",\"name\":\"Alfarouq\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks_count\":5,\"artworks\":[{\"id\":\"19\",\"title\":\"demo artwork updated\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/pexels-photo-64198-large-1481998199-42091.jpeg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/pexels-photo-64198-large-1481998199-42091.jpeg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"Sport, trip\",\"studentAge\":\"6\",\"subject\":{\"id\":\"59\",\"name\":\"Unit of Inquiry\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"20\",\"title\":\"Sandras Artwork2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/IMG_20160421_182153-1481998946-80690.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/IMG_20160421_182153-1481998946-80690.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/IMG_20160421_182153-1481998946-80690.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/IMG_20160421_182153-1481998946-80690.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/IMG_20160421_182153-1481998946-80690.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/IMG_20160421_182153-1481998946-80690.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag12, sport, cartoon, tag2, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10\",\"studentAge\":\"6\",\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"21\",\"title\":\"dd\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"t1,t2\",\"studentAge\":\"6\",\"subject\":{\"id\":\"39\",\"name\":\"Design\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"33\",\"title\":\"artTest\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-08-31\",\"status\":\"0\",\"displayStatus\":\"0\",\"tags\":\"tg gg ggg gdg ggh\",\"studentAge\":\"0\",\"subject\":{\"id\":\"50\",\"name\":\"IT\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]},{\"id\":\"941\",\"type\":\"student\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"artwork_default_display_status\":\"0\",\"address\":\"Damascus\",\"birthday\":\"2016-05-09\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},\"school\":{\"id\":\"938\",\"email\":\"fatherboard1@gmail.com\",\"name\":\"Alfarouq\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks_count\":7,\"artworks\":[{\"id\":\"22\",\"title\":\"first artwork for albert\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"traffic\",\"studentAge\":\"0\",\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"34\",\"title\":\"art\",\"comment_1\":\"v CBC.  b\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c39b13b546f.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c39b13b546f.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c39b13b546f.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c39b13b546f.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c39b13b546f.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c39b13b546f.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tag\",\"studentAge\":\"1\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"35\",\"title\":\"????\",\"comment_1\":\"vfhhf\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c39b59b279d.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c39b59b279d.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c39b59b279d.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c39b59b279d.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c39b59b279d.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c39b59b279d.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"????\",\"studentAge\":\"1\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"36\",\"title\":\"updated\",\"comment_1\":\"comment comment\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c3a404daad4.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c3a404daad4.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c3a404daad4.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c3a404daad4.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c3a404daad4.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c3a404daad4.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tg1,tg2,tg3\",\"studentAge\":\"1\",\"subject\":{\"id\":\"45\",\"name\":\"German\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]}],\"paginator\":{\"total_count\":2,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
           "type": "json"
         }
       ]
@@ -1405,7 +1615,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/StudentsController.php",
     "groupTitle": "Students"
   },
   {
@@ -1413,13 +1623,61 @@ define({ "api": [
     "url": "/students",
     "title": "Students List",
     "name": "Students_List_for_teacher_as_my_studets__access_by_teacher_",
-    "description": "<p>Students List for teacher as my studets -access by  teacher role-</p>",
+    "description": "<p>Students List for teacher as my studets -access by  teacher role- ex:http://localhost:8888/api/v1/students/?ageMin=6&amp;ageMax=8&amp;school=938&amp;country=200&amp;curriculum=0&amp;keyword=Sandra&amp;token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTA1OTQwMTQ4LCJleHAiOjE2NjM2MjAxNDgsIm5iZiI6MTUwNTk0MDE0OCwianRpIjoiMkpub00yMHlnVFpiSjlBZCJ9.TkQmjRvnKu6QOxhO2o0qm0RGM6KJQbTA7yGOAWvXG9Q</p>",
     "group": "Students",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "\n{\"data\":[{\"id\":\"946\",\"type\":\"student\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"gender\":\"M\",\"address\":\"test\",\"birthday\":\"2000-10-05\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"},\"school\":{\"id\":\"944\",\"email\":\"shalabi.eng@gmail.com\",\"name\":\"test school\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks\":[{\"id\":\"28\",\"title\":\"new\",\"comment_1\":\"ssssss\",\"comment_2\":\"\",\"image\":\"http://localhost:8888/public/images/uploads/arts/1000/jh454erg75fdg8rg.jpg\",\"image_500\":\"http://localhost:8888/public/images/uploads/arts/500/jh454erg75fdg8rg.jpg\",\"image_300\":\"http://localhost:8888/public/images/uploads/arts/300/jh454erg75fdg8rg.jpg\",\"image_160\":\"http://localhost:8888/public/images/uploads/arts/160/jh454erg75fdg8rg.jpg\",\"image_60\":\"http://localhost:8888/public/images/uploads/arts/60/jh454erg75fdg8rg.jpg\",\"croppedImage\":\"http://localhost:8888/public/images/uploads/arts/cropped/jh454erg75fdg8rg.jpg\",\"createdAt\":\"2017-07-29\",\"uploadedAt\":\"2017-07-29\",\"keywords\":\"Eid,Festival\",\"studentAge\":3,\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"946\",\"email\":\"student_mail@yopmail.com\",\"first_name\":\"mhd\",\"last_name\":\"student\",\"photo\":\"http://localhost:8888/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"19\",\"name\":\"Barbados \",\"code\":\"1-246\"}}}]}],\"paginator\":{\"total_count\":1,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
+          "content": "\n{\"data\":[{\"id\":\"940\",\"type\":\"student\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"artwork_default_display_status\":\"1\",\"address\":\"Damascus\",\"birthday\":\"2010-12-04\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},\"school\":{\"id\":\"938\",\"email\":\"fatherboard1@gmail.com\",\"name\":\"Alfarouq\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks_count\":5,\"artworks\":[{\"id\":\"19\",\"title\":\"demo artwork updated\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/pexels-photo-64198-large-1481998199-42091.jpeg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/pexels-photo-64198-large-1481998199-42091.jpeg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/pexels-photo-64198-large-1481998199-42091.jpeg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"Sport, trip\",\"studentAge\":\"6\",\"subject\":{\"id\":\"59\",\"name\":\"Unit of Inquiry\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"20\",\"title\":\"Sandras Artwork2\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/IMG_20160421_182153-1481998946-80690.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/IMG_20160421_182153-1481998946-80690.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/IMG_20160421_182153-1481998946-80690.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/IMG_20160421_182153-1481998946-80690.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/IMG_20160421_182153-1481998946-80690.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/IMG_20160421_182153-1481998946-80690.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"1\",\"tags\":\"tag12, sport, cartoon, tag2, tag2, tag3, tag4, tag5, tag6, tag7, tag8, tag9, tag10\",\"studentAge\":\"6\",\"subject\":{\"id\":\"37\",\"name\":\"Art and Design\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"21\",\"title\":\"dd\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/12144933_10153625840551221_4527728814994344442_n-1481999578-48965.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"t1,t2\",\"studentAge\":\"6\",\"subject\":{\"id\":\"39\",\"name\":\"Design\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"33\",\"title\":\"artTest\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/18700154_457068754643378_2177838045826581066_n-1504215064-39058.jpg\",\"createdAt\":\"\",\"uploadedAt\":\"2017-08-31\",\"status\":\"0\",\"displayStatus\":\"0\",\"tags\":\"tg gg ggg gdg ggh\",\"studentAge\":\"0\",\"subject\":{\"id\":\"50\",\"name\":\"IT\"},\"student\":{\"id\":\"940\",\"email\":\"samer.shattah@gmail.com\",\"first_name\":\"Sandra\",\"last_name\":\"Bullock\",\"gender\":\"F\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]},{\"id\":\"941\",\"type\":\"student\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"artwork_default_display_status\":\"0\",\"address\":\"Damascus\",\"birthday\":\"2016-05-09\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"},\"school\":{\"id\":\"938\",\"email\":\"fatherboard1@gmail.com\",\"name\":\"Alfarouq\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}},\"artworks_count\":7,\"artworks\":[{\"id\":\"22\",\"title\":\"first artwork for albert\",\"comment_1\":\"\",\"comment_2\":\"\",\"image\":\"http://www.art2artgallery.com/public/resources/art_images/1000/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_500\":\"http://www.art2artgallery.com/public/resources/art_images/500/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_300\":\"http://www.art2artgallery.com/public/resources/art_images/300/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_160\":\"http://www.art2artgallery.com/public/resources/art_images/160/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"image_60\":\"http://www.art2artgallery.com/public/resources/art_images/60/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"croppedImage\":\"http://www.art2artgallery.com/public/resources/art_images/cropped/12743915_958235654261903_7287175340139310876_n-1482002076-93244.png\",\"createdAt\":\"\",\"uploadedAt\":\"2016-12-17\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"traffic\",\"studentAge\":\"0\",\"subject\":{\"id\":\"44\",\"name\":\"Geography\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"34\",\"title\":\"art\",\"comment_1\":\"v CBC.  b\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c39b13b546f.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c39b13b546f.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c39b13b546f.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c39b13b546f.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c39b13b546f.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c39b13b546f.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tag\",\"studentAge\":\"1\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"35\",\"title\":\"????\",\"comment_1\":\"vfhhf\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c39b59b279d.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c39b59b279d.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c39b59b279d.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c39b59b279d.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c39b59b279d.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c39b59b279d.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"????\",\"studentAge\":\"1\",\"subject\":{\"id\":\"36\",\"name\":\"Arabic Language\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}},{\"id\":\"36\",\"title\":\"updated\",\"comment_1\":\"comment comment\",\"comment_2\":\"\",\"image\":\"http://104.217.253.15:3024/images/uploads/arts/1000/_file59c3a404daad4.png\",\"image_500\":\"http://104.217.253.15:3024/images/uploads/arts/500/_file59c3a404daad4.png\",\"image_300\":\"http://104.217.253.15:3024/images/uploads/arts/300/_file59c3a404daad4.png\",\"image_160\":\"http://104.217.253.15:3024/images/uploads/arts/160/_file59c3a404daad4.png\",\"image_60\":\"http://104.217.253.15:3024/images/uploads/arts/60/_file59c3a404daad4.png\",\"croppedImage\":\"http://104.217.253.15:3024/images/uploads/arts/cropped/_file59c3a404daad4.png\",\"createdAt\":\"2017-09-21\",\"uploadedAt\":\"2017-09-21\",\"status\":\"1\",\"displayStatus\":\"0\",\"tags\":\"tg1,tg2,tg3\",\"studentAge\":\"1\",\"subject\":{\"id\":\"45\",\"name\":\"German\"},\"student\":{\"id\":\"941\",\"email\":\"samer.shatta@gmail.com\",\"first_name\":\"Albert\",\"last_name\":\"Einstein\",\"gender\":\"M\",\"photo\":\"http://104.217.253.15:3024/public/images/uploads/users/default-user.jpg\",\"isActive\":true,\"isVerified\":true,\"country\":{\"id\":\"200\",\"name\":\"Syria \",\"code\":\"00963\"}}}]}],\"paginator\":{\"total_count\":2,\"total_pages\":1,\"current_page\":1,\"limit\":10}}",
           "type": "json"
         }
       ]
@@ -1445,7 +1703,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/StudentsController.php",
+    "filename": "app/Http/Controllers/Api/v1/StudentsController.php",
     "groupTitle": "Students"
   },
   {
@@ -1484,7 +1742,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "/mnt/089C67D19C67B7B8/xampp/htdocs/Art2Art_API/app/Http/Controllers/Api/v1/SubjectsController.php",
+    "filename": "app/Http/Controllers/Api/v1/SubjectsController.php",
     "groupTitle": "Subjects"
   }
 ] });

@@ -7,6 +7,7 @@ use App\Library\Transformers\UserTransformer;
 use App\Library\Transformers\ArtworkTransformer;
 use App\Models\User;
 use App\Models\Artwork;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,20 +20,18 @@ use Illuminate\Support\Facades\Input;
 class StudentsController extends ApiController
 {
 
-    private $clauseProperties = [
-        'keyword',
-        'age',
-        'school',
-        'curriculum',
-        'country'
-    ];
-
-
     /**
      * @api {get} /students Students List
      * @apiName Students List for teacher as my studets -access by  teacher-
-     * @apiDescription Students List for teacher as my studets -access by  teacher role-
+     * @apiDescription Students List for teacher as my studets -access by  teacher role- ex:http://localhost:8888/api/v1/students/?ageMin=6&ageMax=8&school=938&country=200&curriculum=0&keyword=Sandra&token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjkzOSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4ODg4L2FwaS92MS9hdXRoL2xvZ2luIiwiaWF0IjoxNTA1OTQwMTQ4LCJleHAiOjE2NjM2MjAxNDgsIm5iZiI6MTUwNTk0MDE0OCwianRpIjoiMkpub00yMHlnVFpiSjlBZCJ9.TkQmjRvnKu6QOxhO2o0qm0RGM6KJQbTA7yGOAWvXG9Q
      * @apiGroup Students
+     *
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
+     * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} school Optional (query parameter).
+     * @apiParam {Number} curriculum Optional (query parameter).
+     * @apiParam {Number} country Optional (query parameter).
      *
      * @apiSuccessExample {json} Success-Response:
      * 
@@ -44,21 +43,27 @@ class StudentsController extends ApiController
      * {"error":{"code":"UNKNOWN_EXCEPTION","message":" in \/Api\/v1\/StudentsController.php in Line :127","details":[]}}
      */
     public function index(){
-        $user=Auth::User();
         try{
-            $limit = Helpers::getPaginationLimit(Input::get('limit') );
+            $user=Auth::User();
+            $clauseProperties = [
+                'keyword',
+                'ageMin',
+                'ageMax',
+                'school',
+                'curriculum',
+                'country'
+            ];
+            $limit = Input::get('limit');
+            $parameters = request()->input();
+            $whereClauses = Student::getWhereClause($parameters,$clauseProperties);
 
-            // $students = User::where(['user_teacher_id' => $user->user_id,'user_status' => 1,'user_type'=>'student'])->paginate($limit);
             $students =DB::table('user_students')->where('us_teacher_id', $user->user_id)->get();
             $students_ids=[];
             foreach ($students as $key => $student) {
                $students_ids[]=$student->us_student_id;
             }
-            //var_dump($students_ids);die();
-            $students=User::where(function($q) use ($students_ids){
-                    $q->whereIn('user_id',$students_ids);
-                    $q->where('user_type','student');
-                })->paginate($limit);
+            $whereClauses['in_type']['user_id'] = $students_ids;
+            $students = Student::get_all_with_filter($whereClauses,$limit);
 
             return $this->respondWithPagination($students, [
                 'data' => $this->include_artworks(Helpers::transformArray($students->all(), new UserTransformer()))
@@ -66,16 +71,6 @@ class StudentsController extends ApiController
         }catch (Exception $ex){
             return $this->respondUnknownException($ex);
         }
-
-        // try{
-        //     $limit = Helpers::getPaginationLimit(Input::get('limit') );
-        //     $students = User::where(['user_status' => 1,'user_type'=>'student'])->paginate($limit);
-        //     return $this->respondWithPagination($students, [
-        //         'data' => Helpers::transformArray($students->all(), new UserTransformer())
-        //     ]);
-        // }catch (Exception $ex){
-        //     return $this->respondUnknownException($ex);
-        // }
     }
 
     /**
@@ -84,8 +79,11 @@ class StudentsController extends ApiController
      * @apiDescription Students List for specific teacher(access by  school role)
      * @apiGroup Students
      *
-     * @apiParam {Number} age Optional (query parameter).
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
      * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} school Optional (query parameter).
+     * @apiParam {Number} curriculum Optional (query parameter).
      * @apiParam {Number} country Optional (query parameter).
      *
      * @apiSuccessExample {json} Success-Response:
@@ -102,7 +100,6 @@ class StudentsController extends ApiController
      */
     public function students_by_teacher($teacher_id){
         try {
-            $limit = Helpers::getPaginationLimit(Input::get('limit') );
             $user=Auth::User();
 
             $is_school_of_teacher =DB::table('user_students')->where(['us_teacher_id'=>$teacher_id,'us_school_id' => $user->user_id])->get();
@@ -110,41 +107,26 @@ class StudentsController extends ApiController
                 return $this->respondUnauthorized('you are not school for teacher has id='.$teacher_id);
             }
 
+           $clauseProperties = [
+                'keyword',
+                'ageMin',
+                'ageMax',
+                'school',
+                'curriculum',
+                'country'
+            ];
+            $limit = Input::get('limit');
             $parameters = request()->input();
-            $whereClauses = $this->getWhereClause($parameters);
-            //$whereClauses['normal_type']['user_teacher_id'] = $teacher_id;
-            
+            $whereClauses = Student::getWhereClause($parameters,$clauseProperties);
+
             $students =DB::table('user_students')->where(['us_school_id'=> $user->user_id, 'us_teacher_id' => $teacher_id])->get();
             $students_ids=[];
             foreach ($students as $key => $student) {
                $students_ids[]=$student->us_student_id;
             }
             $whereClauses['in_type']['user_id'] = $students_ids;
-            //var_dump($students_ids);die();
 
-            $students = User::where(function($q) use ($whereClauses){
-                        foreach($whereClauses['like_type'] as $key => $value){
-                            $q->orWhere($key, 'LIKE', $value);
-                        }
-                        foreach($whereClauses['in_type'] as $key => $value){
-                            if(empty($value)){
-                                $value=['-1'];
-                            }
-                            $q->whereIn($key,$value);
-                        }
-                        foreach($whereClauses['normal_type'] as $key => $value){
-                            if($key =="user_dob"){
-                                $q->whereYear($key, '=', date('Y') - $value);
-                            }else{
-                                $q->where($key,$value);
-                            }
-                            
-                        }
-                        foreach($whereClauses['compare_type'] as $key => $value){
-                            $q->where($key,$value[0],$value[1]);
-                        }
-                    })->paginate($limit);
-
+            $students = Student::get_all_with_filter($whereClauses,$limit);
 
             return $this->respondWithPagination($students, [
                 'data' => $this->include_artworks(Helpers::transformArray($students->all(), new UserTransformer()))
@@ -156,38 +138,7 @@ class StudentsController extends ApiController
     }
 
 
-    //Private Functions
-    private function getWhereClause($parameters) {
-        $clause = [];
-        $clause['like_type']=[];
-        $clause['normal_type']=[];
-        $clause['in_type']=[];
-        $clause['compare_type']=[];
-        $users_ids_fillter=false;
-        $users_fillter=false;
-        foreach ($this->clauseProperties as $prop) {
-            if (in_array($prop, array_keys($parameters))) {
-                $users=false;
-                if ($prop =='keyword'){
-                     $clause['like_type']['user_full_name'] = '%'.$parameters[$prop].'%';
-                }elseif($prop =='school'){
-                    $clause['normal_type']['user_school_id'] = $parameters[$prop];
-                }elseif($prop =='curriculum'){
-                    $users = User::where(['user_curriculum' => $parameters[$prop],'user_type'=>'student'])->get();
-                    $users_fillter=true;
-                }elseif($prop == 'country'){
-                    $clause['normal_type']['user_country'] = $parameters[$prop];
-                }elseif($prop =='age'){
-                   // $clause['compare_type']['user_dob'] =['>=', Helpers::reverse_birthday($parameters[$prop])];
-                    $clause['normal_type']['user_dob'] =$parameters[$prop];   
-                }
-            }
-        }
 
-        //$clause['normal_type']['user_status'] = 1;
-        $clause['normal_type']['user_type'] = "student";
-        return $clause;
-    }
 
     private function include_artworks($students){
         foreach ($students as $key => $student) {
