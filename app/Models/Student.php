@@ -16,32 +16,41 @@ class Student extends BaseModel
         $limit = Helpers::getPaginationLimit($limit);
 
 		$students = User::where(function($q) use ($whereClauses){
-		        foreach($whereClauses['like_type'] as $key => $value){
-		            $q->orWhere($key, 'LIKE', $value);
-		        }
-		        foreach($whereClauses['in_type'] as $key => $value){
-		            if(empty($value)){
-		                $value=['-1'];
-		            }
-		            $q->whereIn($key,$value);
-		        }
-		        foreach($whereClauses['normal_type'] as $key => $value){
-		            if($key =="user_dob"){
-		               //$q->whereYear($key, '=', date('Y') - $value);
-		            }else{
-		                $q->where($key,$value);
-		            }
-		            
-		        }
-		        foreach($whereClauses['compare_type'] as $key => $value){
-		        	if($key =="ageMin"){
-		            	$q->where("user_dob",$value[0],$value[1]);
-		            }elseif($key =="ageMax"){
-		            	$q->where("user_dob",$value[0],$value[1]);
-		            }else{
-		            	$q->where($key,$value[0],$value[1]);
-		            }
-		        }
+		        if(isset($whereClauses['like_type'])){
+                    foreach($whereClauses['like_type'] as $key => $value){
+                        $q->where($key, 'LIKE', $value);
+                    }
+                }
+                if($whereClauses['in_type']){
+                   foreach($whereClauses['in_type'] as $key => $value){
+                        if(empty($value)){
+                            $value=['-1'];
+                        }
+                        $q->whereIn($key,$value);
+                    } 
+                }
+		        if(isset($whereClauses['normal_type'])){
+                   foreach($whereClauses['normal_type'] as $key => $value){
+                        if($key =="user_dob"){
+                           //$q->whereYear($key, '=', date('Y') - $value);
+                        }else{
+                            $q->where($key,$value);
+                        }
+                        
+                    } 
+                }
+		        if($whereClauses['compare_type']){
+                   foreach($whereClauses['compare_type'] as $key => $value){
+                        if($key =="ageMin"){
+                            $q->where("user_dob",$value[0],$value[1]);
+                        }elseif($key =="ageMax"){
+                            $q->where("user_dob",$value[0],$value[1]);
+                        }else{
+                            $q->where($key,$value[0],$value[1]);
+                        }
+                    } 
+                }
+		        
 		    })->paginate($limit);
 		return $students;
     }

@@ -314,6 +314,7 @@ class ArtworksController extends ApiController
      *
      * @apiParam {String} title 
      * @apiParam {String} tags
+     * @apiParam {String} comment
      * @apiParam {File} image
      * @apiParam {Date} creation_date
      * @apiParam {Boolean} dispaly (0 privat ,1 public)
@@ -374,6 +375,9 @@ class ArtworksController extends ApiController
             }
             if($request->input('creation_date','')){
                  $artwork->art_creation_date = $request->input('creation_date','');
+            }
+            if($request->input('comment','')){
+                $artwork->art_comment_1=$request->input('comment','');
             }
             if($filename){
                  $artwork->art_img_path = $filename;

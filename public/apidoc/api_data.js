@@ -319,6 +319,13 @@ define({ "api": [
           },
           {
             "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "comment",
+            "description": ""
+          },
+          {
+            "group": "Parameter",
             "type": "File",
             "optional": false,
             "field": "image",
@@ -1162,6 +1169,54 @@ define({ "api": [
     "name": "Artworks_List",
     "description": "<p>access by student</p>",
     "group": "Profile",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMin",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "ageMax",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "keyword",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "school",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "curriculum",
+            "description": "<p>Optional (query parameter).</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "country",
+            "description": "<p>Optional (query parameter).</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {

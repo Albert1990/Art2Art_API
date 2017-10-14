@@ -24,13 +24,13 @@ class UserUpdateProfileRequest extends ApiRequest
     public function rules()
     {
         return [
-            'artwork_default_display_status' => "required|in:0,1",
-            'first_name' => "required|string|min:2|max:100",
-            'last_name' => "required|string|min:2|max:100",
-            'phone' => 'required',
-            'gender' => 'required|in:M,F',
-            'birthday' => 'required|date',
-            'countryId' => 'required|integer|exists:countries,country_id',
+            'artwork_default_display_status' => "in:0,1",
+            'first_name' => "string|min:2|max:100",
+            'last_name' => "string|min:2|max:100",
+            'phone' => '',
+            'gender' => 'in:M,F',
+            'birthday' => 'date',
+            'countryId' => 'integer|exists:countries,country_id',
         ];
     }
 }

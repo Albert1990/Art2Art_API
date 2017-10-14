@@ -61,7 +61,7 @@ class Artwork extends BaseModel
                 $users=[];
                 if ($prop =='keyword'){
                      $clause['like_type']['art_title'] = '%'.$parameters[$prop].'%';
-                     $clause['like_type']['art_keywords'] = '%'.$parameters[$prop].'%';
+                     // $clause['like_type']['art_keywords'] = '%'.$parameters[$prop].'%';
                 }elseif($prop =='school'){
                     $users = User::where(['user_school_id' => $parameters[$prop],'user_type'=>'student'])->get();
                     $users_fillter=true;
@@ -109,21 +109,30 @@ class Artwork extends BaseModel
         $limit = Helpers::getPaginationLimit($limit);
 
         $artworks = self::where(function($q) use ($whereClauses){
-                    foreach($whereClauses['like_type'] as $key => $value){
-                        $q->orWhere($key, 'LIKE', $value);
-                    }
-                    foreach($whereClauses['in_type'] as $key => $value){
+                if(isset($whereClauses['like_type'])){
+                   foreach($whereClauses['like_type'] as $key => $value){
+                        $q->where($key, 'LIKE', $value);
+                    } 
+                }
+                if(isset($whereClauses['in_type'])){
+                   foreach($whereClauses['in_type'] as $key => $value){
                         if(empty($value)){
                             $value=['-1'];
                         }
                         $q->whereIn($key,$value);
-                    }
-                    foreach($whereClauses['normal_type'] as $key => $value){
+                    } 
+                }   
+                if(isset($whereClauses['normal_type']))   {
+                   foreach($whereClauses['normal_type'] as $key => $value){
                         $q->where($key,$value);
-                    }
-                    foreach($whereClauses['compare_type'] as $key => $value){
+                    } 
+                }
+                if(isset($whereClauses['compare_type'])){
+                   foreach($whereClauses['compare_type'] as $key => $value){
                             $q->where($key,$value[0],$value[1]);
-                        }
+                    } 
+                } 
+                    
                 })->paginate($limit);
         return $artworks;
 

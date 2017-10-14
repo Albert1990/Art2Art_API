@@ -28,6 +28,13 @@ class ProfileController extends ApiController
      * @apiDescription access by student
      * @apiGroup Profile
      *
+     * @apiParam {Number} ageMin Optional (query parameter).
+     * @apiParam {Number} ageMax Optional (query parameter).
+     * @apiParam {String} keyword Optional (query parameter).
+     * @apiParam {Number} school Optional (query parameter).
+     * @apiParam {Number} curriculum Optional (query parameter).
+     * @apiParam {Number} country Optional (query parameter).
+     *
      * @apiSuccessExample {json} Success-Response: Without access token
      * {"data":[{"id":"18","title":"Ipad","comment_1":"","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/image-1458211130-54373.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/image-1458211130-54373.jpg","createdAt":"","uploadedAt":"2016-03-17","keywords":"Toys","studentAge":4,"subject":{"id":"37","name":"Art and Design"},"student":""},{"id":"25","title":"Map","comment_1":"","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584181-23669.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584181-23669.jpg","createdAt":"","uploadedAt":"2017-04-07","keywords":"","studentAge":"","subject":"","student":""},{"id":"26","title":"Map","comment_1":"","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491584320-39063.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491584320-39063.jpg","createdAt":"","uploadedAt":"2017-04-07","keywords":"UAE, Map","studentAge":5,"subject":{"id":"44","name":"Geography"},"student":""},{"id":"27","title":"Map2","comment_1":"","comment_2":"","image":"http://www.art2artgallery.com/public/resources/art_images/1000/samplemap2-1491585701-84711.jpg","croppedImage":"http://www.art2artgallery.com/public/resources/art_images/cropped/samplemap2-1491585701-84711.jpg","createdAt":"","uploadedAt":"2017-04-07","keywords":"Map","studentAge":"","subject":{"id":"47","name":"History"},"student":""}],"paginator":{"total_count":4,"total_pages":1,"current_page":1,"limit":10}}
      *
@@ -42,17 +49,42 @@ class ProfileController extends ApiController
      */
     public function artworks()
     {
-        $user=Auth::User();
-        $whereClauses=['art_student_id' => $user->user_id];
-        try {
-            $limit = Helpers::getPaginationLimit(Input::get('limit') );
+        // $user=Auth::User();
+        // $whereClauses=['art_student_id' => $user->user_id];
+        // try {
+        //     $limit = Helpers::getPaginationLimit(Input::get('limit') );
 
-            $artworks = Artwork::where($whereClauses)->paginate($limit);
+        //     $artworks = Artwork::where($whereClauses)->paginate($limit);
+
+        //     return $this->respondWithPagination($artworks, [
+        //         'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
+        //     ]);
+
+        // } catch (Exception $ex) {
+        //     return $this->respondUnknownException($ex);
+        // }
+        $user=Auth::User();
+        $clauseProperties = [
+            'keyword',
+            'ageMin',
+            'ageMax',
+            'school',
+            'curriculum',
+            'country'
+        ];
+        $parameters = request()->input();
+        // $withKeys = $this->getWithKeys($parameters);
+        $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
+        $whereClauses['normal_type']['art_student_id' ] = $user->user_id;
+        //print_r($whereClauses);die();
+        try {
+            $limit = Input::get('limit');
+
+            $artworks = Artwork::get_all_with_filter($whereClauses,$limit);
 
             return $this->respondWithPagination($artworks, [
                 'data' => Helpers::transformArray($artworks->all(), new ArtworkTransformer())
             ]);
-
         } catch (Exception $ex) {
             return $this->respondUnknownException($ex);
         }
@@ -97,14 +129,30 @@ class ProfileController extends ApiController
                 $student->user_image=Helpers::uploadFile($file,UserTransformer::IMAGES_PATH);
                 $student->user_image_verified=0;
             }
-            $student->user_artwork_default_display_status =$request->input('artwork_default_display_status','');
-            $student->user_first_name =$request->input('first_name','');
-            $student->user_last_name =$request->input('last_name','');
-            $student->user_gender =$request->input('gender','');
-            $student->user_phonenumber =$request->input('phone','');
-            $student->user_dob =$request->input('birthday','');
-            $student->user_country =$request->input('countryId','');
-            $student->user_full_name= $student->user_first_name.' '.$student->user_last_name;
+            if($request->input('artwork_default_display_status','')){
+                $student->user_artwork_default_display_status =$request->input('artwork_default_display_status','');
+            }
+            if($request->input('first_name','')){
+                $student->user_first_name =$request->input('first_name','');    
+            }
+            if($request->input('last_name','')){
+                $student->user_last_name =$request->input('last_name','');    
+            }
+            if($request->input('gender','')){
+                $student->user_gender =$request->input('gender','');
+            }
+            if($request->input('phone','')){
+               $student->user_phonenumber =$request->input('phone',''); 
+            }
+            if($request->input('birthday','')){
+                $student->user_dob =$request->input('birthday','');
+            }
+            if($request->input('countryId','')){
+                $student->user_country =$request->input('countryId','');
+            }
+             if($request->input('first_name','') || $request->input('last_name','')){
+                $student->user_full_name= $student->user_first_name.' '.$student->user_last_name;
+            }
             $student->save();
 
             return $this->respondUpdated(Helpers::transformObject($student, new UserTransformer()));
