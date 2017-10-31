@@ -127,9 +127,9 @@ class ProfileController extends ApiController
             if($file){
                 Helpers::deleteFile(UserTransformer::IMAGES_PATH . $student->user_image);
                 $student->user_image=Helpers::uploadFile($file,UserTransformer::IMAGES_PATH);
-                $student->user_image_verified=0;
+                $student->user_image_verified=1;
             }
-            if($request->input('artwork_default_display_status','')){
+            if($request->has('artwork_default_display_status')){
                 $student->user_artwork_default_display_status =$request->input('artwork_default_display_status','');
             }
             if($request->input('first_name','')){
