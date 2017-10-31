@@ -22,7 +22,7 @@
 			</td>
 		</tr><tr><td>
 			<div style="background:#002142;padding:4px;font-size:12px;text-align:center;color:#FFFFFF;">
-			<p>Copyright © 2016 Art2Artgallery. All rights reserved.</p>
+			<p>Copyright © 2016 Art2Art gallery. All rights reserved.</p>
 
 			<p><strong><a href="http://www.art2artgallery.com" style="color:#ffffff;" rel="nofollow">Visit Website</a></strong></p>
 			</div>

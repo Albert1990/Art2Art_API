@@ -18,7 +18,8 @@
 Route::group(['prefix'=>'api/v1'],function(){
  
     //users
-    Route::post('auth/register','\App\Http\Controllers\Api\v1\UsersController@register');
+    Route::post('contact_us','\App\Http\Controllers\Api\v1\OthersController@contactUs');
+
     Route::post('auth/login','\App\Http\Controllers\Api\v1\UsersController@login');
     Route::post('auth/forget_password','\App\Http\Controllers\Api\v1\UsersController@forgetPassword');
     Route::post('auth/reset_password','\App\Http\Controllers\Api\v1\UsersController@resetPassword');

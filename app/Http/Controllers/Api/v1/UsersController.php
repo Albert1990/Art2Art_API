@@ -21,7 +21,6 @@ use App\Http\Requests\UserSocialRegisterRequest;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use Mockery\CountValidator\Exception;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -274,6 +273,5 @@ class UsersController extends ApiController
         }
 
     }
-
 
 }
