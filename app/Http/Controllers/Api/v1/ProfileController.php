@@ -76,6 +76,7 @@ class ProfileController extends ApiController
         // $withKeys = $this->getWithKeys($parameters);
         $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
         $whereClauses['normal_type']['art_student_id' ] = $user->user_id;
+        unset($whereClauses['normal_type']['art_display_status']);
         //print_r($whereClauses);die();
         try {
             $limit = Input::get('limit');
