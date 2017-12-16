@@ -36,18 +36,22 @@ class Artwork extends BaseModel
         return $this->hasOne('App\Models\User','user_id','art_student_id');
     }
 
-
-    public static function getWithKeys($parameters) {
-        $withKeys = [];
-
-        if (isset($parameters['include'])) {
-            $includeParms = explode(',', $parameters['include']);
-            $includes = array_intersect($this->supportedIncludes, $includeParms);
-            $withKeys = array_keys($includes);
-        }
-
-        return $withKeys;
+    public function teacher(){
+        return $this->hasOne('App\Models\User','user_id','art_teacher_id');
     }
+
+
+//    public static function getWithKeys($parameters) {
+//        $withKeys = [];
+//
+//        if (isset($parameters['include'])) {
+//            $includeParms = explode(',', $parameters['include']);
+//            $includes = array_intersect($this->supportedIncludes, $includeParms);
+//            $withKeys = array_keys($includes);
+//        }
+//
+//        return $withKeys;
+//    }
 
     public static function getWhereClause($parameters,$clauseProperties) {
         $clause = [];

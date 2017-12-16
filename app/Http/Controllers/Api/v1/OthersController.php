@@ -13,7 +13,7 @@ class OthersController extends ApiController
     /**
      * Contact us
      *
-     * @api {post} /contactUs Contact us
+     * @api {post} /contact_us Contact us
      * @apiName ContactUs
      * @apiGroup Others
      *
