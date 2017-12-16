@@ -30,7 +30,7 @@ class CreateArtworkRequest extends ApiRequest
             'tags' => 'required|string',
             'subjectId' => 'required|integer|exists:subjects,sub_id',
             'studentId' =>'required|integer|exists:users,user_id',
-            'comment' => 'required|string',
+            'comment' => 'string',
             'createdAt' => 'date'
         ];
     }

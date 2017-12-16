@@ -92,6 +92,10 @@ class ArtworksController extends ApiController
      * @apiParam {Number} school Optional (query parameter).
      * @apiParam {Number} curriculum Optional (query parameter).
      * @apiParam {Number} country Optional (query parameter).
+     * @apiParam {Date} addDateMax Optional (query parameter - "Y-m-d" format).
+     * @apiParam {Date} addDateMin Optional (query parameter - "Y-m-d" format).
+     * @apiParam {String} display Optional (query parameter - public|private|all).
+     * @apiParam {Number} student Optional (query parameter - student ID).
      *
      * @apiSuccessExample {json} Success-Response: 
      * 
@@ -109,7 +113,11 @@ class ArtworksController extends ApiController
             'ageMax',
             'school',
             'curriculum',
-            'country'
+            'country',
+            'student',
+            'display',
+            'addDateMax',
+            'addDateMin'
         ];
 
         $teacher= Auth::User();
@@ -117,7 +125,6 @@ class ArtworksController extends ApiController
         // $withKeys = $this->getWithKeys($parameters);
         $whereClauses = Artwork::getWhereClause($parameters,$clauseProperties);
         $whereClauses['normal_type']['art_teacher_id']= $teacher->user_id;
-        unset($whereClauses['normal_type']['art_display_status']);
         unset($whereClauses['normal_type']['art_status']);
         try {
             $limit = Input::get('limit');

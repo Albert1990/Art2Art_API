@@ -20,3 +20,6 @@ CREATE TABLE `abcd_art`.`art_likes` (
 
 ALTER TABLE `users` ADD `user_artwork_default_display_status` BOOLEAN NULL DEFAULT FALSE AFTER `user_pobox`;
 
+
+
+replace all latin1 to utf8

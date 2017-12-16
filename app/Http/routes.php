@@ -37,7 +37,10 @@ Route::group(['prefix'=>'api/v1'],function(){
     //Subjects
     Route::get('subjects','\App\Http\Controllers\Api\v1\SubjectsController@index');
 
+    //authenticated user
     Route::group(['middleware'=>'jwt.auth'],function(){
+        //profile
+        Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
 
         //Comments
         Route::post('comments', '\App\Http\Controllers\Api\v1\CommentsController@store');
@@ -68,6 +71,9 @@ Route::group(['prefix'=>'api/v1'],function(){
     //teacher role
     Route::group(['middleware'=>['jwt.auth','has.role:teacher']],function(){
 
+        //profile
+//        Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
+
         //Students
         Route::get('students','\App\Http\Controllers\Api\v1\StudentsController@index'); 
         Route::get('students/artworks','\App\Http\Controllers\Api\v1\ArtworksController@artworks_by_teacher_students');
@@ -76,7 +82,7 @@ Route::group(['prefix'=>'api/v1'],function(){
         //Artworks
         Route::post('artworks', '\App\Http\Controllers\Api\v1\ArtworksController@store');
         Route::put('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@update');
-        Route::delete('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@destroy'); 
+        Route::delete('artworks/{id}', '\App\Http\Controllers\Api\v1\ArtworksController@destroy');
     });
 
     //school role
@@ -91,7 +97,7 @@ Route::group(['prefix'=>'api/v1'],function(){
 
         //profile
         Route::get('profile/artworks', '\App\Http\Controllers\Api\v1\ProfileController@artworks');
-        Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
+//        Route::put('profile', '\App\Http\Controllers\Api\v1\ProfileController@update');
         //artworks
         Route::put('artworks/{id}/update_display', '\App\Http\Controllers\Api\v1\ArtworksController@update_by_student');
     });

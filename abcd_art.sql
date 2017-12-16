@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `artworks` (
   `art_subject_id` int(11) DEFAULT NULL COMMENT 'Subject table relation',
   `art_student_age` int(11) NOT NULL,
   `art_display_status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=''private'',1=''public'''
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1 COMMENT='Art Uploads by Teacher';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='Art Uploads by Teacher';
 
 --
 -- Dumping data for table `artworks`
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `art_comments` (
   `com_user_id` int(11) NOT NULL COMMENT 'commented by',
   `com_art_id` int(11) NOT NULL COMMENT 'commented on art',
   `com_comment` text NOT NULL COMMENT 'Comment desc'
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1 COMMENT='Comments';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='Comments';
 
 --
 -- Dumping data for table `art_comments`
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `art_ratings` (
   `rating_user_id` int(11) NOT NULL COMMENT 'Rating on user id',
   `rating_IP` varchar(100) NOT NULL COMMENT 'Rating of IP',
   `rating_value` varchar(50) NOT NULL COMMENT 'Rating Value '
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Star Rating for Artworks';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Star Rating for Artworks';
 
 -- --------------------------------------------------------
 
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `art_view_requests` (
   `request_receiver_id` int(11) NOT NULL COMMENT 'Id of Request Receiver',
   `request_msg` text NOT NULL COMMENT 'Request Message',
   `request_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='View Requests sent by Parents';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='View Requests sent by Parents';
 
 -- --------------------------------------------------------
 
@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `blogs` (
   `blog_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0=''inactive'',1=''active''',
   `blog_image` varchar(255) NOT NULL,
   `blog_created` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1 COMMENT='Blog Posts';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='Blog Posts';
 
 --
 -- Dumping data for table `blogs`
@@ -157,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `blog_categories` (
   `blog_cat_id` int(11) NOT NULL,
   `blog_cat_title` varchar(255) NOT NULL COMMENT 'Category Title',
   `blog_cat_status` enum('0','1') NOT NULL DEFAULT '1' COMMENT '0=''inactive'',1=''active'''
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='Blog Categories';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Blog Categories';
 
 --
 -- Dumping data for table `blog_categories`
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
   `blog_comment_content` text NOT NULL,
   `blog_comment_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `blog_comment_status` enum('0','1') NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Blog Comments';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Blog Comments';
 
 -- --------------------------------------------------------
 
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `cities` (
   `city_country_id` int(11) NOT NULL,
   `city_status` enum('0','1') NOT NULL,
   `city_name` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10031 DEFAULT CHARSET=latin1 COMMENT='Cities Table';
+) ENGINE=InnoDB AUTO_INCREMENT=10031 DEFAULT CHARSET=utf8 COMMENT='Cities Table';
 
 --
 -- Dumping data for table `cities`
@@ -10103,7 +10103,7 @@ CREATE TABLE IF NOT EXISTS `class` (
   `c_teacher` int(11) NOT NULL,
   `c_date` date NOT NULL,
   `c_sid` int(11) NOT NULL COMMENT 'School Id'
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `class`
@@ -10126,7 +10126,7 @@ CREATE TABLE IF NOT EXISTS `class_subjects` (
   `cls_sub_id` int(11) NOT NULL,
   `subject_class_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `class_subjects`
@@ -10157,7 +10157,7 @@ CREATE TABLE IF NOT EXISTS `comment_likes` (
   `like_art_id` int(11) DEFAULT NULL COMMENT 'artwork id',
   `like_comment_id` int(11) NOT NULL COMMENT 'Comment which is liked',
   `like_user_id` int(11) NOT NULL COMMENT 'Liked by user'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Likes on Products';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Likes on Products';
 
 -- --------------------------------------------------------
 
@@ -10172,7 +10172,7 @@ CREATE TABLE IF NOT EXISTS `config` (
   `config_title` varchar(255) NOT NULL,
   `config_value` varchar(255) NOT NULL,
   `config_updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `config`
@@ -10205,7 +10205,7 @@ CREATE TABLE IF NOT EXISTS `content_block` (
   `content_block_title` varchar(255) NOT NULL,
   `content_block_content` text NOT NULL,
   `content_block_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `content_block`
@@ -10225,7 +10225,7 @@ INSERT INTO `content_block` (`content_block_id`, `content_block_title`, `content
 
 CREATE TABLE IF NOT EXISTS `countries` (
   `country_id` int(11) NOT NULL,
-  `country_name` varchar(255) CHARACTER SET latin1 NOT NULL,
+  `country_name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `isd_code` varchar(255) COLLATE utf8_bin NOT NULL,
   `country_time_diff` varchar(5) COLLATE utf8_bin NOT NULL,
   `country_timezone` varchar(255) COLLATE utf8_bin NOT NULL,
@@ -10493,7 +10493,7 @@ CREATE TABLE IF NOT EXISTS `curriculums` (
   `cu_id` int(11) NOT NULL,
   `cu_title` varchar(255) NOT NULL,
   `cu_status` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=''inactive'',1=''active'''
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='Curriculums';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='Curriculums';
 
 --
 -- Dumping data for table `curriculums`
@@ -10526,7 +10526,7 @@ CREATE TABLE IF NOT EXISTS `email_templates` (
   `emailtemp_subject` varchar(500) NOT NULL,
   `emailtemp_content` text,
   `emailtemp_modified` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `email_templates`
@@ -10556,7 +10556,7 @@ CREATE TABLE IF NOT EXISTS `graphic_media` (
   `media_alt` varchar(255) NOT NULL,
   `media_path` varchar(255) NOT NULL,
   `media_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `graphic_media`
@@ -10585,7 +10585,7 @@ CREATE TABLE IF NOT EXISTS `log_login` (
   `log_login_device` varchar(50) NOT NULL,
   `log_login_browser` varchar(100) NOT NULL,
   `log_login_lastalive` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4740 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4740 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `log_login`
@@ -15346,7 +15346,7 @@ CREATE TABLE IF NOT EXISTS `module_faq` (
   `faq_ques_answer` text NOT NULL,
   `faq_ques_status` enum('0','1') NOT NULL,
   `faq_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `module_faq`
@@ -15389,7 +15389,7 @@ CREATE TABLE IF NOT EXISTS `module_faq_categories` (
   `faq_category_name` varchar(255) NOT NULL,
   `faq_category_status` enum('0','1') NOT NULL DEFAULT '1',
   `faq_category_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `module_faq_categories`
@@ -15425,7 +15425,7 @@ CREATE TABLE IF NOT EXISTS `navigation_menu` (
   `menu_publish` enum('0','1') NOT NULL DEFAULT '0',
   `menu_updated` datetime NOT NULL,
   `menu_author` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `navigation_menu`
@@ -15451,7 +15451,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `page_title` varchar(255) NOT NULL,
   `page_content` text NOT NULL,
   `page_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `pages`
@@ -15472,7 +15472,7 @@ CREATE TABLE IF NOT EXISTS `secret_questions` (
   `secret_question_status` enum('0','1') NOT NULL DEFAULT '1',
   `secret_question_created` datetime NOT NULL,
   `secret_question_created_by` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `secret_questions`
@@ -15522,7 +15522,7 @@ CREATE TABLE IF NOT EXISTS `slider_images` (
   `slider_image_path` varchar(255) NOT NULL,
   `slider_image_status` enum('0','1') NOT NULL DEFAULT '1',
   `slider_image_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -15584,7 +15584,7 @@ CREATE TABLE IF NOT EXISTS `student_classes` (
   `stduent_school_id` int(11) NOT NULL,
   `student_self_id` int(11) NOT NULL,
   `student_class_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `student_classes`
@@ -15607,7 +15607,7 @@ CREATE TABLE IF NOT EXISTS `student_subjects` (
   `s_sub_id` int(11) NOT NULL,
   `s_class_id` int(11) NOT NULL,
   `s_student_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `student_subjects`
@@ -15635,7 +15635,7 @@ CREATE TABLE IF NOT EXISTS `subjects` (
   `sub_name` varchar(255) NOT NULL,
   `sub_status` enum('0','1') NOT NULL COMMENT '0=''inactive'',1=''active''',
   `sub_created` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1 COMMENT='Subjects';
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='Subjects';
 
 --
 -- Dumping data for table `subjects`
@@ -15677,7 +15677,7 @@ INSERT INTO `subjects` (`sub_id`, `sub_name`, `sub_status`, `sub_created`) VALUE
 CREATE TABLE IF NOT EXISTS `timezone` (
   `timezone_id` int(11) NOT NULL,
   `timezone_name` varchar(250) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `timezone`
@@ -15847,7 +15847,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_class_id` int(11) NOT NULL,
   `user_parent_name` varchar(255) NOT NULL COMMENT 'Parent name of students',
   `user_pobox` varchar(255) NOT NULL COMMENT 'User post box number'
-) ENGINE=InnoDB AUTO_INCREMENT=944 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=944 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
@@ -15884,7 +15884,7 @@ CREATE TABLE IF NOT EXISTS `user_classes` (
   `uc_school_id` int(11) NOT NULL,
   `uc_teacher_id` int(11) NOT NULL,
   `uc_created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Class and Subjects relation data';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Class and Subjects relation data';
 
 -- --------------------------------------------------------
 
@@ -15898,7 +15898,7 @@ CREATE TABLE IF NOT EXISTS `user_students` (
   `us_teacher_id` int(11) NOT NULL,
   `us_student_id` int(11) NOT NULL,
   `us_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1 COMMENT='Students data associated with teacher';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='Students data associated with teacher';
 
 --
 -- Dumping data for table `user_students`
@@ -15921,7 +15921,7 @@ CREATE TABLE IF NOT EXISTS `user_subjects` (
   `us_user_id` int(11) NOT NULL COMMENT 'User Id',
   `us_class_id` int(11) NOT NULL COMMENT 'Class Id',
   `us_teacher_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Relation between subjects and classes and users';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Relation between subjects and classes and users';
 
 -- --------------------------------------------------------
 
@@ -15934,7 +15934,7 @@ CREATE TABLE IF NOT EXISTS `user_teacher_class` (
   `utc_class_id` int(11) NOT NULL,
   `utc_teacher_id` int(11) NOT NULL,
   `utc_created` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Teacher and Class relation table';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Teacher and Class relation table';
 
 --
 -- Indexes for dumped tables
