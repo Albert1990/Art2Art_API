@@ -167,9 +167,10 @@ class Artwork extends BaseModel
                                 $q->where($key,$item[0],$item[1]);
                             }
                     }
-                } 
-                    
-                })->paginate($limit);
+                }
+                })
+                ->orderBy('art_creation_date','desc')
+                ->paginate($limit);
         return $artworks;
 
     }
