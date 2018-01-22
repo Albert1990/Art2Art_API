@@ -22,7 +22,7 @@ class ArtworkTransformer extends BaseTransformerAbstract {
 
     ];  
     const IMAGES_PATH = 'images/uploads/arts/';
-
+//    const IMAGES_PATH = './../../public/resources/art_images/';
     public function transform(Artwork $item){
         $user = Auth::user();
            

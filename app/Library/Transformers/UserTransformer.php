@@ -19,6 +19,7 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends BaseTransformerAbstract{
     const IMAGES_PATH = 'images/uploads/users/';
+    //    const IMAGES_PATH = './../../public/resources/profile_images/';
     private $default_user_image = 'default-user.jpg';
 
     private $is_minified = false;
