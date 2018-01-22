@@ -51,7 +51,9 @@ class Student extends BaseModel
                     } 
                 }
 		        
-		    })->paginate($limit);
+		    })
+            ->orderBy('user_first_name','asc')
+            ->paginate($limit);
 		return $students;
     }
 
